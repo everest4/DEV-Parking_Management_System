@@ -1,0 +1,18 @@
+{
+  "users": [
+    { "email": "admin@test.com", "password": "admin123", "role": "Admin" },
+    { "email": "attendant@test.com", "password": "attendant123", "role": "Attendant" }
+  ],
+  "lots": [
+    { "id": 1, "name": "Main Lot", "address": "Downtown", "timezone": "Europe/Tirane" }
+  ],
+  "spots": [
+    { "id": 1, "lotId": 1, "code": "A1", "type": "Regular", "status": "Free" },
+    { "id": 2, "lotId": 1, "code": "A2", "type": "EV", "status": "Occupied" }
+  ],
+  "tariffs": [
+    { "id": 1, "lotId": 1, "ratePerHour": 2, "gracePeriod": 15, "billingPeriod": 30 }
+  ],
+  "tickets": [],
+  "payments": []
+}
