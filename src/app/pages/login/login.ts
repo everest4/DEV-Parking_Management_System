@@ -59,7 +59,7 @@ export class LoginComponent {
         if (user) {
           console.log('✅ Login success', user);
           localStorage.setItem('user', JSON.stringify(user));
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/home']);
         } else {
           this.error = 'Invalid email or password';
         }

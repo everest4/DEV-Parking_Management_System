@@ -9,6 +9,7 @@
   "spots": [
     { "id": 1, "lotId": 1, "code": "A1", "type": "Regular", "status": "Free" },
     { "id": 2, "lotId": 1, "code": "A2", "type": "EV", "status": "Occupied" }
+
   ],
   "tariffs": [
     { "id": 1, "lotId": 1, "ratePerHour": 2, "gracePeriod": 15, "billingPeriod": 30 }
