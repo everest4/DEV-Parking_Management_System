@@ -1,27 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ParkingService {
+export class LoginService {
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
-  // Fetch all parking lots
-  getLots(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/lots`);
-  }
-
-  // Fetch all parking spots
-  getSpots(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/spots`);
-  }
-
-  // Fetch all tariffs
-  getTariffs(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/tariffs`);
+  login(email: string, password: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/login`, { email, password });
   }
 }
