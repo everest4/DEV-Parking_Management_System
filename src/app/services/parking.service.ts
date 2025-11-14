@@ -1,17 +1,30 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs';
+
+export interface ParkingSpace {
+  name: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
-  private apiUrl = environment.apiUrl;
+export class ParkingService {
 
-  constructor(private http: HttpClient) {}
+  private parkingSpaces: ParkingSpace[] = [];
 
-  login(email: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, { email, password });
+  getSpaces() {
+    return this.parkingSpaces;
+  }
+
+  addSpace(name: string): { success: boolean; message: string } {
+    const exists = this.parkingSpaces.some(
+      p => p.name.toLowerCase() === name.toLowerCase()
+    );
+
+    if (exists) {
+      return { success: false, message: 'This parking space already exists.' };
+    }
+
+    this.parkingSpaces.push({ name });
+    return { success: true, message: 'Parking space added.' };
   }
 }

@@ -1,18 +1,118 @@
 {
   "users": [
-    { "email": "admin@test.com", "password": "admin123", "role": "Admin" },
-    { "email": "attendant@test.com", "password": "attendant123", "role": "Attendant" }
+    {
+      "email": "admin@test.com",
+      "password": "admin123",
+      "role": "Admin"
+    },
+    {
+      "email": "attendant@test.com",
+      "password": "attendant123",
+      "role": "Attendant"
+    }
   ],
   "lots": [
-    { "id": 1, "name": "Main Lot", "address": "Downtown", "timezone": "Europe/Tirane" }
+    {
+      "id": 1,
+      "name": "Main Lot",
+      "address": "Downtown",
+      "timezone": "Europe/Tirane"
+    }
   ],
   "spots": [
-    { "id": 1, "lotId": 1, "code": "A1", "type": "Regular", "status": "Free" },
-    { "id": 2, "lotId": 1, "code": "A2", "type": "EV", "status": "Occupied" }
-
+    {
+      "id": 1763156403951,
+      "lotId": 1,
+      "code": "A1",
+      "type": "Regular",
+      "status": "Free"
+    },
+    {
+      "id": 1763156408662,
+      "lotId": 1,
+      "code": "A2",
+      "type": "Regular",
+      "status": "Free"
+    },
+    {
+      "id": 1763156413908,
+      "lotId": 1,
+      "code": "A3",
+      "type": "Regular",
+      "status": "Free"
+    },
+    {
+      "id": 1763156418868,
+      "lotId": 1,
+      "code": "A4",
+      "type": "EV",
+      "status": "Free"
+    },
+    {
+      "id": 1763156472144,
+      "lotId": 1,
+      "code": "B1",
+      "type": "Regular",
+      "status": "Free"
+    },
+    {
+      "id": 1763156486527,
+      "lotId": 1,
+      "code": "B2",
+      "type": "Regular",
+      "status": "Free"
+    },
+    {
+      "id": 1763156490542,
+      "lotId": 1,
+      "code": "B3",
+      "type": "Regular",
+      "status": "Free"
+    },
+    {
+      "id": 1763156494757,
+      "lotId": 1,
+      "code": "B4",
+      "type": "EV",
+      "status": "Free"
+    },
+    {
+      "id": 1763156502730,
+      "lotId": 1,
+      "code": "C1",
+      "type": "Regular",
+      "status": "Free"
+    },
+    {
+      "id": 1763156509758,
+      "lotId": 1,
+      "code": "C2",
+      "type": "Regular",
+      "status": "Free"
+    },
+    {
+      "id": 1763156513756,
+      "lotId": 1,
+      "code": "C3",
+      "type": "Regular",
+      "status": "Free"
+    },
+    {
+      "id": 1763156519947,
+      "lotId": 1,
+      "code": "C4",
+      "type": "EV",
+      "status": "Free"
+    }
   ],
   "tariffs": [
-    { "id": 1, "lotId": 1, "ratePerHour": 2, "gracePeriod": 15, "billingPeriod": 30 }
+    {
+      "id": 1,
+      "lotId": 1,
+      "ratePerHour": 2,
+      "gracePeriod": 15,
+      "billingPeriod": 30
+    }
   ],
   "tickets": [],
   "payments": []

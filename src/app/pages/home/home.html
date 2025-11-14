@@ -1,30 +1,83 @@
-<mat-toolbar color="primary" class="toolbar">
-  <span class="title">Parking Management Dashboard</span>
-  <span class="spacer"></span>
-  <button mat-icon-button>
-    <mat-icon>account_circle</mat-icon>
-  </button>
+<mat-toolbar color="primary" class="navbar">
+  <span class="logo">🅿️ Parking Dashboard</span>
 </mat-toolbar>
 
-<div class="dashboard">
-  <section class="stats-grid">
-    <mat-card *ngFor="let stat of stats" class="stat-card" [style.border-top-color]="stat.color">
-      <mat-icon [style.color]="stat.color">{{ stat.icon }}</mat-icon>
-      <h3>{{ stat.title }}</h3>
-      <h2>{{ stat.value }}</h2>
-    </mat-card>
-  </section>
+<div class="home-container">
+  <h1>Manage Parking Spots</h1>
 
-  <mat-divider></mat-divider>
+  <!-- Add Spot Form -->
+  <form [formGroup]="addSpotForm" (ngSubmit)="addSpot()" class="add-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Floor</mat-label>
+      <mat-select formControlName="floor">
+        <mat-option value="A">A</mat-option>
+        <mat-option value="B">B</mat-option>
+        <mat-option value="C">C</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <section class="lots-section">
-    <h2>Parking Lots</h2>
-    <div class="lot-list">
-      <mat-card *ngFor="let lot of lots" class="lot-card">
-        <h3>{{ lot.name }}</h3>
-        <p><mat-icon>place</mat-icon> {{ lot.address }}</p>
-        <p><mat-icon>schedule</mat-icon> {{ lot.timezone }}</p>
+    <mat-form-field appearance="outline">
+      <mat-label>Number</mat-label>
+      <input matInput formControlName="number" type="number" min="1" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Type</mat-label>
+      <mat-select formControlName="type">
+        <mat-option value="Regular">Regular</mat-option>
+        <mat-option value="EV">EV</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="accent" type="submit">Add Spot</button>
+  </form>
+@if (loading) {
+  <div class="loading">Loading spots...</div>
+}
+
+@if (error) {
+  <div class="error">{{ error }}</div>
+}
+
+@if (!loading && !error) {
+  <div class="spots-grid">
+    @for (spot of spots; track spot.id) {
+      <mat-card [ngClass]="{
+        free: spot.status === 'Free',
+        occupied: spot.status === 'Occupied',
+        ev: spot.type === 'EV'
+      }">
+          
+        <mat-card-header>
+          <mat-icon>local_parking</mat-icon>
+          <mat-card-title>{{ spot.code }}</mat-card-title>
+          <mat-card-subtitle>{{ spot.type }}</mat-card-subtitle>
+
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="deleteSpot(spot)">
+              <mat-icon>delete</mat-icon>
+              <span>Delete</span>
+            </button>
+          </mat-menu>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p>Status: <strong>{{ spot.status }}</strong></p>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="toggleStatus(spot)">
+            {{ spot.status === 'Free' ? 'Occupy' : 'Free Up' }}
+          </button>
+        </mat-card-actions>
+
       </mat-card>
-    </div>
-  </section>
+    }
+  </div>
+}
+
 </div>

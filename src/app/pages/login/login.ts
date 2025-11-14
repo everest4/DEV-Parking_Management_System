@@ -40,8 +40,10 @@ export class LoginComponent {
       password: ['', [Validators.required, Validators.minLength(4)]]
     });
 
-    // ✅ Quick backend connectivity test
-    this.http.get(`${environment.apiUrl}/users`).subscribe({
+    // ✅ Force a fresh response every time
+    this.http.get(`${environment.apiUrl}/users?nocache=${Date.now()}`, {
+      headers: { 'Cache-Control': 'no-cache' }
+    }).subscribe({
       next: (res) => console.log('✅ Connected to backend:', res),
       error: (err) => console.error('❌ Backend connection failed:', err)
     });
@@ -52,12 +54,15 @@ export class LoginComponent {
 
     const { email, password } = this.loginForm.value;
 
-    // Simulate login via backend data
-    this.http.get<any[]>(`${environment.apiUrl}/users`).subscribe({
+    // ✅ Always fetch fresh user data
+    this.http.get<any[]>(`${environment.apiUrl}/users?nocache=${Date.now()}`, {
+      headers: { 'Cache-Control': 'no-cache' }
+    }).subscribe({
       next: (users) => {
+        console.log('📦 Received users:', users);
         const user = users.find(u => u.email === email && u.password === password);
         if (user) {
-          console.log('✅ Login success', user);
+          console.log('✅ Login success:', user);
           localStorage.setItem('user', JSON.stringify(user));
           this.router.navigate(['/home']);
         } else {
