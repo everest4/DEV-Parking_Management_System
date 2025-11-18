@@ -1,1 +1,16 @@
-<router-outlet></router-outlet>
+<mat-toolbar color="primary">
+  <span>Parking Management System</span>
+
+  <span style="flex: 1 1 auto;"></span>
+
+  <button mat-button routerLink="/">Home</button>
+  <button mat-button routerLink="/login">Login</button>
+  <button mat-button routerLink="/parking-spots">Parking Spots</button>
+  <button mat-button routerLink="/tariffs">Tariffs</button>
+  <button mat-button routerLink="/tickets">Tickets</button>
+  <button mat-button routerLink="/users">Users</button>
+</mat-toolbar>
+
+<div style="padding: 20px;">
+  <router-outlet></router-outlet>
+</div>

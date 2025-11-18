@@ -1,30 +1,16 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
+import { ParkingSpot } from '../models/parking-spot.model';
 
-export interface ParkingSpace {
-  name: string;
-}
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class ParkingService {
+  private baseUrl = `${environment.apiUrl}/parking-spots`;
 
-  private parkingSpaces: ParkingSpace[] = [];
+  constructor(private http: HttpClient) {}
 
-  getSpaces() {
-    return this.parkingSpaces;
-  }
-
-  addSpace(name: string): { success: boolean; message: string } {
-    const exists = this.parkingSpaces.some(
-      p => p.name.toLowerCase() === name.toLowerCase()
-    );
-
-    if (exists) {
-      return { success: false, message: 'This parking space already exists.' };
-    }
-
-    this.parkingSpaces.push({ name });
-    return { success: true, message: 'Parking space added.' };
+  getAll(): Observable<ParkingSpot[]> {
+    return this.http.get<ParkingSpot[]>(this.baseUrl);
   }
 }
