@@ -3,10 +3,11 @@ import { LoginPage } from './pages/login/login';
 import { LayoutPage } from './layout/layout';
 
 export const routes: Routes = [
-  // Login = first page
-  { path: '', component: LoginPage },
+  // Login first, separate
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginPage },
 
-  // Everything after login goes inside layout shell
+  // Everything after login uses layout
   {
     path: '',
     component: LayoutPage,
@@ -14,27 +15,27 @@ export const routes: Routes = [
       {
         path: 'home',
         loadComponent: () =>
-          import('./pages/home/home').then(m => m.HomePage),
+          import('./pages/home/home').then(m => m.HomePage)
       },
       {
         path: 'parking-spots',
         loadComponent: () =>
-          import('./pages/parking-spots/parking-spots').then(m => m.ParkingSpotsPage),
+          import('./pages/parking-spots/parking-spots').then(m => m.ParkingSpotsPage)
       },
       {
         path: 'tariffs',
         loadComponent: () =>
-          import('./pages/tariffs/tariffs').then(m => m.TariffsPage),
+          import('./pages/tariffs/tariffs').then(m => m.TariffsPage)
       },
       {
         path: 'tickets',
         loadComponent: () =>
-          import('./pages/tickets/tickets').then(m => m.TicketsPage),
+          import('./pages/tickets/tickets').then(m => m.TicketsPage)
       },
       {
         path: 'users',
         loadComponent: () =>
-          import('./pages/users/users').then(m => m.UsersPage),
+          import('./pages/users/users').then(m => m.UsersPage)
       }
     ]
   }

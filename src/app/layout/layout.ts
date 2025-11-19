@@ -1,4 +1,4 @@
-import { Component, ViewChild, effect } from '@angular/core';
+import { Component, ViewChild, Inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -6,7 +6,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 
-
+import { PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   standalone: true,
@@ -24,24 +25,25 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class LayoutPage {
   @ViewChild(MatSidenav) drawer!: MatSidenav;
-    isDarkMode = false;
+  isDarkMode = false;
 
-  constructor() {
-    // Load from localStorage
-    const saved = localStorage.getItem('darkMode');
-    this.isDarkMode = saved === 'true';
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
 
-    // Apply on startup
-    document.body.classList.toggle('dark-mode', this.isDarkMode);
+    // ONLY run this in the browser, never on server
+    if (isPlatformBrowser(this.platformId)) {
+      const saved = localStorage.getItem('darkMode');
+      this.isDarkMode = saved === 'true';
+      document.body.classList.toggle('dark-mode', this.isDarkMode);
+    }
   }
 
   toggleDarkMode() {
     this.isDarkMode = !this.isDarkMode;
 
-    // Apply to body
-    document.body.classList.toggle('dark-mode', this.isDarkMode);
-
-    // Save preference
-    localStorage.setItem('darkMode', this.isDarkMode.toString());
+    // Only update DOM + localStorage in browser
+    if (isPlatformBrowser(this.platformId)) {
+      document.body.classList.toggle('dark-mode', this.isDarkMode);
+      localStorage.setItem('darkMode', this.isDarkMode.toString());
+    }
   }
 }
