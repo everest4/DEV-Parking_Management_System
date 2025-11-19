@@ -1,23 +1,36 @@
-<h1>Parking Spots</h1>
+<div class="page-container">
 
-<table mat-table [dataSource]="data" class="mat-elevation-z8">
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <mat-select [(value)]="filter" (selectionChange)="changeFilter($event.value)">
+      <mat-option value="all">All Spots</mat-option>
+      <mat-option value="free">Free Spots</mat-option>
+      <mat-option value="occupied">Occupied Spots</mat-option>
+      <mat-option value="unavailable">Unavailable Spots</mat-option>
+    </mat-select>
+  </div>
 
-  <ng-container matColumnDef="number">
-    <th mat-header-cell *matHeaderCellDef> Spot # </th>
-    <td mat-cell *matCellDef="let p"> {{ p.number }} </td>
-  </ng-container>
+  <!-- Spots Grid -->
+  <div class="spots-grid">
 
-  <ng-container matColumnDef="status">
-    <th mat-header-cell *matHeaderCellDef> Status </th>
-    <td mat-cell *matCellDef="let p"> {{ p.status }} </td>
-  </ng-container>
+    @for (spot of filteredSpots; track spot.id) {
 
-  <ng-container matColumnDef="vehicleId">
-    <th mat-header-cell *matHeaderCellDef> Vehicle </th>
-    <td mat-cell *matCellDef="let p"> {{ p.vehicleId || 'None' }} </td>
-  </ng-container>
+      <mat-card class="spot-card"
+        [class.free]="spot.status === 'Free'"
+        [class.occupied]="spot.status === 'Occupied'"
+        [class.unavailable]="spot.status === 'Unavailable'"
+        [class.ev]="spot.type === 'EV'"
+      >
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <mat-card-header>
+          <mat-card-title>{{ spot.code }}</mat-card-title>
+          <mat-card-subtitle>{{ spot.type }} • {{ spot.status }}</mat-card-subtitle>
+        </mat-card-header>
 
-</table>
+      </mat-card>
+
+    }
+
+  </div>
+
+</div>

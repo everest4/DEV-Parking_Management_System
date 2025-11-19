@@ -1,3 +1,61 @@
-table {
-  width: 100%;
+.page-container {
+  padding: 1.5rem;
+}
+
+.filter-bar {
+  width: 200px;
+  margin-bottom: 1.5rem;
+}
+
+.spots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.spot-card {
+  text-align: center;
+  padding: 1rem;
+  border-radius: 16px;
+  color: white;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+/* STATUS COLORS */
+.free {
+  background: #4caf50; /* Green */
+}
+
+.occupied {
+  background: #e53935; /* Red */
+}
+
+.unavailable {
+  background: #757575; /* Grey */
+}
+
+/* EV styling */
+.ev {
+  background: linear-gradient(135deg, #2196f3, #64b5f6);
+}
+
+/* Dark Mode Enhancements */
+.dark-mode .free {
+  background: #2e7d32 !important;
+}
+
+.dark-mode .occupied {
+  background: #b71c1c !important;
+}
+
+.dark-mode .unavailable {
+  background: #616161 !important;
+}
+
+.dark-mode .ev {
+  background: linear-gradient(135deg, #1565c0, #42a5f5) !important;
 }
