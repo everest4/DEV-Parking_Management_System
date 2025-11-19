@@ -1,0 +1,39 @@
+.tariffs-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+
+  h2 {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+}
+
+.tariff-card {
+  padding: 20px;
+  border-radius: 14px;
+  margin-bottom: 16px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.tariff-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  width: 120px;
+}
+
+.price-field {
+  flex: 1;
+}
+
+.dark-mode .tariff-card {
+  background: #1e1e1e !important;
+  color: white !important;
+}

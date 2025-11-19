@@ -1,0 +1,39 @@
+<div class="tickets-container">
+
+  <h2>Generate Parking Tickets</h2>
+
+  <!-- OCCUPIED SPOTS LIST -->
+  <div class="spots-grid">
+    @for (spot of spots; track spot.id) {
+      <mat-card class="spot-card">
+
+        <mat-card-title>{{ spot.code }}</mat-card-title>
+        <mat-card-subtitle>
+          Occupied for: {{ getElapsedMinutes(spot.id) }} min
+        </mat-card-subtitle>
+
+        <button mat-raised-button color="primary" (click)="generateTicket(spot)">
+          Generate Ticket
+        </button>
+
+      </mat-card>
+    }
+  </div>
+
+  <!-- GENERATED TICKETS -->
+  <h3 *ngIf="tickets.length > 0">Generated Tickets</h3>
+
+  <div class="tickets-grid">
+    @for (ticket of tickets; track ticket.id) {
+      <mat-card class="ticket-card">
+        <mat-card-title>Ticket #{{ ticket.id }}</mat-card-title>
+
+        <p><strong>Spot:</strong> {{ ticket.spot }}</p>
+        <p><strong>Time:</strong> {{ ticket.time }} min</p>
+        <p><strong>Price:</strong> <span class="price">{{ ticket.price }} LEK</span></p>
+
+      </mat-card>
+    }
+  </div>
+
+</div>

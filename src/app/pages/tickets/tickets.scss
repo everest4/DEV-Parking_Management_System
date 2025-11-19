@@ -1,0 +1,43 @@
+.tickets-container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+
+  h2 {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+}
+
+.spots-grid, .tickets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.spot-card, .ticket-card {
+  padding: 20px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+
+  button {
+    margin-top: 12px;
+    width: 100%;
+    border-radius: 10px;
+  }
+}
+
+.price {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #007aff;
+}
+
+.dark-mode .spot-card,
+.dark-mode .ticket-card {
+  background: #1e1e1e !important;
+  color: white !important;
+  box-shadow: 0 3px 10px rgba(255,255,255,0.08);
+}

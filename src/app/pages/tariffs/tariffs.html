@@ -1,0 +1,30 @@
+<div class="tariffs-container">
+
+  <h2>Parking Tariffs</h2>
+
+  @for (tariff of tariffs; track tariff.id) {
+
+    <mat-card class="tariff-card">
+
+      <div class="tariff-row">
+
+        <div class="label">
+          {{ tariff.label }}
+        </div>
+
+        <mat-form-field appearance="outline" class="price-field">
+          <mat-label>Price (LEK)</mat-label>
+          <input matInput type="number" [(ngModel)]="tariff.price">
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="saveTariff(tariff)">
+          Save
+        </button>
+
+      </div>
+      
+    </mat-card>
+
+  }
+
+</div>

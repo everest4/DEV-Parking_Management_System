@@ -25,28 +25,28 @@
       "lotId": 1,
       "code": "A1",
       "type": "Regular",
-      "status": "Free"
+      "status": "Occupied"
     },
     {
       "id": 1763156408662,
       "lotId": 1,
       "code": "A2",
       "type": "Regular",
-      "status": "Free"
+      "status": "Occupied"
     },
     {
       "id": 1763156413908,
       "lotId": 1,
       "code": "A3",
       "type": "Regular",
-      "status": "Free"
+      "status": "Occupied"
     },
     {
       "id": 1763156472144,
       "lotId": 1,
       "code": "B1",
       "type": "Regular",
-      "status": "Free"
+      "status": "Occupied"
     },
     {
       "id": 1763156502730,
@@ -90,7 +90,8 @@
       "lotId": 1,
       "ratePerHour": 2,
       "gracePeriod": 15,
-      "billingPeriod": 30
+      "billingPeriod": 30,
+      "price": 97
     }
   ],
   "tickets": [],
