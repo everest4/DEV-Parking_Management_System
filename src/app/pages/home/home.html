@@ -1,6 +1,80 @@
-<mat-card>
-  <mat-card-title>Welcome</mat-card-title>
-  <mat-card-content>
-    <p>This is the Parking Management System dashboard.</p>
-  </mat-card-content>
-</mat-card>
+<div class="home-container">
+
+  <!-- Loading state -->
+  @if (loading) {
+    <p class="loading">Loading...</p>
+  }
+
+  <!-- Error state -->
+  @if (error) {
+    <p class="error">{{ error }}</p>
+  }
+
+  <!-- ADD SPOT FORM -->
+  <form [formGroup]="addSpotForm" class="add-form">
+    <mat-form-field appearance="fill">
+      <mat-label>Floor</mat-label>
+      <input matInput formControlName="floor">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Number</mat-label>
+      <input matInput formControlName="number">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Type</mat-label>
+      <mat-select formControlName="type">
+        <mat-option value="Regular">Regular</mat-option>
+        <mat-option value="EV">EV</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="addSpot()">
+      Add Spot
+    </button>
+  </form>
+
+  <!-- SPOTS GRID -->
+  <div class="spots-grid">
+
+    @for (spot of spots; track spot.id) {
+
+      <mat-card
+        class="
+          spot-card
+          {{ spot.status === 'Free' ? 'free' : 'occupied' }}
+          {{ spot.type === 'EV' ? 'ev' : '' }}
+        "
+      >
+
+        <!-- Menu Button -->
+        <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-btn">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="deleteSpot(spot)">
+            <mat-icon>delete</mat-icon> Delete
+          </button>
+        </mat-menu>
+
+        <!-- Title -->
+        <mat-card-title>{{ spot.code }}</mat-card-title>
+
+        <mat-card-content>
+          <p>Type: {{ spot.type }}</p>
+          <p>Status: {{ spot.status }}</p>
+        </mat-card-content>
+
+        <button mat-button (click)="toggleStatus(spot)">
+          Mark as {{ spot.status === 'Free' ? 'Occupied' : 'Free' }}
+        </button>
+
+      </mat-card>
+
+    }
+
+  </div>
+
+</div>

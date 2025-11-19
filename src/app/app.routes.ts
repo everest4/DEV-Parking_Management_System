@@ -3,11 +3,12 @@ import { LoginPage } from './pages/login/login';
 import { LayoutPage } from './layout/layout';
 
 export const routes: Routes = [
-  // Login first, separate
   { path: '', redirectTo: 'login', pathMatch: 'full' },
+
+  // Login page has NO layout
   { path: 'login', component: LoginPage },
 
-  // Everything after login uses layout
+  // Layout wraps all authenticated pages
   {
     path: '',
     component: LayoutPage,
@@ -38,5 +39,8 @@ export const routes: Routes = [
           import('./pages/users/users').then(m => m.UsersPage)
       }
     ]
-  }
+  },
+
+  // Wildcard fallback
+  { path: '**', redirectTo: 'login' }
 ];

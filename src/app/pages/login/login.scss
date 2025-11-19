@@ -1,16 +1,115 @@
-.login-container {
+/* Light gray background like Instagram */
+.login-wrapper {
+  background: #f5e25060;
   height: 100vh;
+
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  mat-card {
-    width: 350px;
-    padding: 20px;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* White card similar to Instagram */
+.login-card {
+  width: 350px;
+  padding: 40px 40px 30px;
+  background: #fff;
+  border: 1px solid #dbdbdb;
+  border-radius: 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  align-items: center;
+}
+
+/* Instagram-style logo */
+.logo {
+  font-family: "Segoe UI", sans-serif;
+  font-size: 32px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Inputs */
+.input {
+  width: 100%;
+
+  mat-form-field {
+    width: 100%;
   }
 
-  .full {
-    width: 100%;
-    margin-top: 15px;
+  .mdc-text-field {
+    background: #fafafa !important;
+    border-radius: 4px !important;
+  }
+
+  .mdc-text-field--filled {
+    box-shadow: none !important;
   }
 }
+
+/* Blue Instagram-like button */
+.login-btn {
+  width: 100%;
+  background: #0095f6 !important;
+  color: #fff !important;
+  font-weight: 600;
+  margin-top: 8px;
+  padding: 6px 0;
+  border-radius: 8px;
+  text-transform: none;
+}
+
+/* Divider (—— OR ——) */
+.divider {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin: 15px 0;
+  color: #8e8e8e;
+  font-size: 12px;
+  font-weight: 500;
+
+  .line {
+    flex: 1;
+    height: 1px;
+    background: #dbdbdb;
+  }
+
+  span {
+    margin: 0 15px;
+  }
+}
+
+/* Forgot password */
+.forgot {
+  text-decoration: none;
+  color: #00376b;
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+/* Signup box under the card */
+.signup-box {
+  width: 350px;
+  text-align: center;
+
+  padding: 20px;
+  font-size: 14px;
+  background: #fff;
+  border: 1px solid #dbdbdb;
+  border-radius: 20px;
+
+  a {
+    color: #0095f6;
+    font-weight: 600;
+    text-decoration: none;
+  }
+}
+

@@ -62,19 +62,3 @@ mat-card {
   color: red;
   margin-bottom: 1rem;
 }
-
-mat-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.header-right {
-  margin-left: auto;
-}

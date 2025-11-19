@@ -1,19 +1,33 @@
-<div class="login-container">
-  <mat-card>
-    <h2>Login</h2>
+<div class="login-wrapper">
 
-    <mat-form-field appearance="outline" class="full">
-      <mat-label>Username</mat-label>
-      <input matInput [(ngModel)]="username" />
+  <div class="login-card">
+
+    <h1 class="logo">Parking System</h1>
+
+    <mat-form-field appearance="fill" class="input">
+      <input matInput placeholder="Username" [(ngModel)]="username" />
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="full">
-      <mat-label>Password</mat-label>
-      <input matInput type="password" [(ngModel)]="password" />
+    <mat-form-field appearance="fill" class="input">
+      <input matInput type="password" placeholder="Password" [(ngModel)]="password" />
     </mat-form-field>
 
-    <button mat-raised-button color="primary" class="full" (click)="login()">
-      Login
+    <button mat-flat-button class="login-btn" (click)="login()">
+      Log In
     </button>
-  </mat-card>
+
+    <div class="divider">
+      <div class="line"></div>
+      <span>OR</span>
+      <div class="line"></div>
+    </div>
+
+    <a class="forgot" href="#">Forgot password?</a>
+
+  </div>
+
+  <div class="signup-box">
+    Don't have an account? <a href="#">Sign up</a>
+  </div>
+
 </div>

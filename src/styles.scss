@@ -31,3 +31,73 @@ $dark-theme: mat.define-theme((
 * {
   transition: background-color .2s linear, color .2s linear, border-color .2s linear;
 }
+
+/* ================================
+   GLOBAL DARK MODE
+   ================================ */
+.dark-mode {
+  background: #121212 !important;
+  color: #ffffff !important;
+}
+
+/* Layout background */
+.dark-mode .layout-container,
+.dark-mode .content-area {
+  background: #000 !important;
+}
+
+/* Topbar */
+.dark-mode .topbar {
+  background: #1c1c1c !important;
+  border-bottom: 1px solid #333 !important;
+}
+
+.dark-mode .topbar .left {
+  color: #fff;
+}
+
+.dark-mode .topbar mat-icon {
+  color: #fff !important;
+}
+
+.dark-mode .logout-btn {
+  color: #0095f6 !important;
+}
+
+/* Sidebar */
+.dark-mode .sidebar {
+  background: #1a1a1a !important;
+  border-right: 1px solid #333 !important;
+}
+
+.dark-mode .sidebar-header .logo-text {
+  color: #fff !important;
+}
+
+.dark-mode .sidebar-header .logo-icon {
+  color: #fff !important;
+}
+
+/* Sidebar items */
+.dark-mode mat-nav-list a {
+  color: #e6e6e6 !important;
+}
+
+.dark-mode mat-nav-list a:hover {
+  background: #333 !important;
+}
+
+.dark-mode .active {
+  color: #0095f6 !important;
+}
+
+/* Content */
+.dark-mode .content-wrapper {
+  color: #fff !important;
+}
+
+/* Cards (if any inside pages) */
+.dark-mode mat-card {
+  background: #1e1e1e !important;
+  color: #fff !important;
+}
