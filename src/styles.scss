@@ -1,23 +1,33 @@
 @use '@angular/material' as mat;
 
-// Required Material core styles
-@include mat.core();
-
-// Theming configuration for Material v20
-$my-theme: mat.define-theme((
+// Light theme
+$light-theme: mat.define-theme((
   color: (
     theme-type: light,
     use-system-variables: true
   )
 ));
 
-// Apply theme to all components
-@include mat.all-component-colors($my-theme);
-@include mat.all-component-typographies($my-theme);
-@include mat.all-component-densities($my-theme);
+// Dark theme
+$dark-theme: mat.define-theme((
+  color: (
+    theme-type: dark,
+    use-system-variables: true
+  )
+));
 
-// Global body styles
-body {
-  margin: 0;
-  font-family: Roboto, sans-serif;
+// Default = light theme
+@include mat.all-component-colors($light-theme);
+@include mat.all-component-typographies($light-theme);
+@include mat.all-component-densities($light-theme);
+
+// Dark theme class (activated with .dark-mode on body)
+.dark-mode {
+  @include mat.all-component-colors($dark-theme);
+  @include mat.all-component-typographies($dark-theme);
+  @include mat.all-component-densities($dark-theme);
+}
+
+* {
+  transition: background-color .2s linear, color .2s linear, border-color .2s linear;
 }
