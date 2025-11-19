@@ -3,12 +3,14 @@ import { LoginPage } from './pages/login/login';
 import { LayoutPage } from './layout/layout';
 
 export const routes: Routes = [
+
+  // Redirect to login by default
   { path: '', redirectTo: 'login', pathMatch: 'full' },
 
-  // Login page has NO layout
+  // Login does NOT use layout
   { path: 'login', component: LoginPage },
 
-  // Layout wraps all authenticated pages
+  // Main layout wraps all authenticated pages
   {
     path: '',
     component: LayoutPage,
@@ -21,26 +23,30 @@ export const routes: Routes = [
       {
         path: 'parking-spots',
         loadComponent: () =>
-          import('./pages/parking-spots/parking-spots').then(m => m.ParkingSpotsPage)
+          import('./pages/parking-spots/parking-spots')
+            .then(m => m.ParkingSpotsPage)
       },
       {
         path: 'tariffs',
         loadComponent: () =>
-          import('./pages/tariffs/tariffs').then(m => m.TariffsPage)
+          import('./pages/tariffs/tariffs')
+            .then(m => m.TariffsPage)
       },
       {
         path: 'tickets',
         loadComponent: () =>
-          import('./pages/tickets/tickets').then(m => m.TicketsPage)
+          import('./pages/tickets/tickets')
+            .then(m => m.TicketsPage)
       },
       {
         path: 'users',
         loadComponent: () =>
-          import('./pages/users/users').then(m => m.UsersPage)
+          import('./pages/users/users')
+            .then(m => m.UsersPage)
       }
     ]
   },
 
-  // Wildcard fallback
+  // Fallback
   { path: '**', redirectTo: 'login' }
 ];

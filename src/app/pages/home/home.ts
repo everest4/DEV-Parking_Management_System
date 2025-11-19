@@ -75,11 +75,16 @@ export class HomePage implements OnInit {
       });
   }
 
-  // ADD SPOT
   addSpot() {
     if (this.addSpotForm.invalid) return;
 
     const { floor, number, type } = this.addSpotForm.value;
+
+    if (number < 1 || number > 30) {
+      alert("Spot number must be between 1 and 30.");
+      return;
+    }
+
     const code = `${floor}${number}`;
 
     if (this.spots.some(s => s.code.toLowerCase() === code.toLowerCase())) {
@@ -102,6 +107,7 @@ export class HomePage implements OnInit {
     this.addSpotForm.reset();
   }
 
+
   // DELETE SPOT
   deleteSpot(spot: any) {
     if (!confirm(`Delete spot ${spot.code}?`)) return;
@@ -110,5 +116,37 @@ export class HomePage implements OnInit {
       next: () => this.spots = this.spots.filter(s => s.id !== spot.id)
     });
   }
+
+  bookSpot(spot: any) {
+  if (spot.status !== 'Free') return;
+
+  const confirmed = confirm(`Book spot ${spot.code}?`);
+  if (!confirmed) return;
+
+  this.http.patch(`${environment.apiUrl}/spots/${spot.id}`, { status: 'Occupied' })
+    .subscribe({
+      next: () => {
+        spot.status = 'Occupied';
+        alert(`Spot ${spot.code} successfully booked!`);
+      }
+    });
+  }
+
+  unbookSpot(spot: any) {
+  if (spot.status !== 'Occupied') return;
+
+  const confirmed = confirm(`Unbook spot ${spot.code}?`);
+  if (!confirmed) return;
+
+  this.http.patch(`${environment.apiUrl}/spots/${spot.id}`, { status: 'Free' })
+    .subscribe({
+      next: () => {
+        spot.status = 'Free';
+        alert(`Spot ${spot.code} is now free again.`);
+      }
+    });
+  }
+
+
 
 }
