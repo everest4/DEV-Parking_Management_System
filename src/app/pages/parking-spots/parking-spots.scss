@@ -1,61 +1,93 @@
+/* -------------------------------------------------- */
+/* PAGE LAYOUT */
+/* -------------------------------------------------- */
 .page-container {
   padding: 1.5rem;
 }
 
+/* -------------------------------------------------- */
+/* FILTER BAR */
+/* -------------------------------------------------- */
 .filter-bar {
   width: 200px;
   margin-bottom: 1.5rem;
 }
 
+/* -------------------------------------------------- */
+/* GRID */
+/* -------------------------------------------------- */
 .spots-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 16px;
 }
 
+/* -------------------------------------------------- */
+/* CARD BASE STYLE */
+/* -------------------------------------------------- */
 .spot-card {
   text-align: center;
   padding: 1rem;
   border-radius: 16px;
-  color: white;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: white;
+  color: white; /* overwritten per status */
 
   &:hover {
-    transform: scale(1.05);
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
   }
 }
 
-/* STATUS COLORS */
-.free {
-  background: #4caf50; /* Green */
+/* -------------------------------------------------- */
+/* LIGHT MODE — STATUS COLORS */
+/* -------------------------------------------------- */
+.spot-card.free {
+  background: #4caf50;
 }
 
-.occupied {
-  background: #e53935; /* Red */
+.spot-card.occupied {
+  background: #e53935;
 }
 
-.unavailable {
-  background: #757575; /* Grey */
+.spot-card.unavailable {
+  background: #757575;
 }
 
-/* EV styling */
-.ev {
+.spot-card.ev {
   background: linear-gradient(135deg, #2196f3, #64b5f6);
 }
 
-/* Dark Mode Enhancements */
-.dark-mode .free {
+/* -------------------------------------------------- */
+/* DARK MODE BASE */
+/* -------------------------------------------------- */
+:host-context(.dark-mode) .spot-card {
+  background: #1e1e1e !important;
+  color: white !important;
+}
+
+/* -------------------------------------------------- */
+/* DARK MODE — OVERRIDES PER TYPE */
+/* -------------------------------------------------- */
+
+:host-context(.dark-mode) .spot-card.free {
   background: #2e7d32 !important;
 }
 
-.dark-mode .occupied {
+:host-context(.dark-mode) .spot-card.occupied {
   background: #b71c1c !important;
 }
 
-.dark-mode .unavailable {
+:host-context(.dark-mode) .spot-card.unavailable {
   background: #616161 !important;
 }
 
-.dark-mode .ev {
+/* EV dark mode gradient */
+:host-context(.dark-mode) .spot-card.ev {
   background: linear-gradient(135deg, #1565c0, #42a5f5) !important;
+}
+
+/* Optional: stronger hover in dark mode */
+:host-context(.dark-mode) .spot-card:hover {
+  box-shadow: 0 6px 16px rgba(255,255,255,0.1);
 }

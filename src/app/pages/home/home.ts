@@ -33,7 +33,12 @@ export class HomePage implements OnInit {
   spots: any[] = [];
   loading = true;
   error = '';
+
   numbers = Array.from({ length: 30 }, (_, i) => i + 1); // 1–30
+
+  // TIMER STORAGE
+  timers: { [id: number]: string } = {};
+  timerIntervals: { [id: number]: any } = {};
 
   addSpotForm!: FormGroup;
 
@@ -53,12 +58,52 @@ export class HomePage implements OnInit {
     this.http.get<any[]>(`${environment.apiUrl}/spots`).subscribe({
       next: res => {
         this.spots = res;
+        this.sortSpots();
         this.loading = false;
+
+        // Restore timers for occupied ones
+        this.spots.forEach(spot => {
+          const key = `timer_${spot.id}`;
+          if (spot.status === 'Occupied' && localStorage.getItem(key)) {
+            this.startTimer(spot.id);
+          }
+        });
       },
       error: () => this.error = 'Failed to load spots'
     });
   }
 
+  /* TIMER HELPERS */
+  formatTime(seconds: number): string {
+    const h = Math.floor(seconds / 3600).toString().padStart(2, '0');
+    const m = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
+    const s = Math.floor(seconds % 60).toString().padStart(2, '0');
+    return `${h}:${m}:${s}`;
+  }
+
+  startTimer(spotId: number) {
+    const key = `timer_${spotId}`;
+
+    if (!localStorage.getItem(key)) {
+      localStorage.setItem(key, Date.now().toString());
+    }
+
+    this.timerIntervals[spotId] = setInterval(() => {
+      const start = Number(localStorage.getItem(key));
+      const elapsedSeconds = (Date.now() - start) / 1000;
+      this.timers[spotId] = this.formatTime(elapsedSeconds);
+    }, 1000);
+  }
+
+  stopTimer(spotId: number) {
+    clearInterval(this.timerIntervals[spotId]);
+    delete this.timerIntervals[spotId];
+
+    localStorage.removeItem(`timer_${spotId}`);
+    this.timers[spotId] = '00:00:00';
+  }
+
+  /* ADD SPOT */
   addSpot() {
     if (this.addSpotForm.invalid) return;
 
@@ -79,28 +124,50 @@ export class HomePage implements OnInit {
     };
 
     this.http.post(`${environment.apiUrl}/spots`, newSpot).subscribe({
-      next: () => this.spots.push(newSpot)
+      next: () => {
+        this.spots.push(newSpot);
+        this.sortSpots();
+      }
     });
 
     this.addSpotForm.reset();
   }
 
+  /* BOOK SPOT */
   bookSpot(spot: any) {
     if (spot.status !== 'Free' || spot.type === 'Unavailable') return;
 
     this.http.patch(`${environment.apiUrl}/spots/${spot.id}`, { status: 'Occupied' })
-      .subscribe(() => spot.status = 'Occupied');
+      .subscribe(() => {
+        spot.status = 'Occupied';
+        this.startTimer(spot.id);
+      });
   }
 
+  /* UNBOOK SPOT */
   unbookSpot(spot: any) {
     this.http.patch(`${environment.apiUrl}/spots/${spot.id}`, { status: 'Free' })
-      .subscribe(() => spot.status = 'Free');
+      .subscribe(() => {
+        spot.status = 'Free';
+        this.stopTimer(spot.id);
+      });
   }
 
+  /* DELETE SPOT */
   deleteSpot(spot: any) {
-    this.http.delete(`${environment.apiUrl}/spots/${spot.id}`)
-      .subscribe(() =>
-        this.spots = this.spots.filter(s => s.id !== spot.id)
-      );
+    this.http.delete(`${environment.apiUrl}/spots/${spot.id}`).subscribe(() => {
+      this.stopTimer(spot.id);
+      this.spots = this.spots.filter(s => s.id !== spot.id);
+    });
+  }
+
+  /* SORTING */
+  sortSpots() {
+    this.spots.sort((a, b) => {
+      const floorA = a.code[0];
+      const floorB = b.code[0];
+      if (floorA !== floorB) return floorA.localeCompare(floorB);
+      return parseInt(a.code.slice(1)) - parseInt(b.code.slice(1));
+    });
   }
 }

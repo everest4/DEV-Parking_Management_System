@@ -81,7 +81,16 @@
 
         <mat-card-header>
           <mat-card-title>{{ spot.code }}</mat-card-title>
-          <mat-card-subtitle>{{ spot.type }} • {{ spot.status }}</mat-card-subtitle>
+          <mat-card-subtitle>
+            {{ spot.type }} • {{ spot.status }}
+
+            @if (spot.status === 'Occupied') {
+              <span class="timer">
+                ⏱ {{ timers[spot.id] || '00:00:00' }}
+              </span>
+            }
+          </mat-card-subtitle>
+
         </mat-card-header>
 
         <!-- ACTIONS -->

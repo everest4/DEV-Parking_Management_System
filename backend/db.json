@@ -32,7 +32,7 @@
       "lotId": 1,
       "code": "A2",
       "type": "Regular",
-      "status": "Occupied"
+      "status": "Free"
     },
     {
       "id": 1763156413908,
@@ -42,13 +42,6 @@
       "status": "Free"
     },
     {
-      "id": 1763156418868,
-      "lotId": 1,
-      "code": "A4",
-      "type": "EV",
-      "status": "Occupied"
-    },
-    {
       "id": 1763156472144,
       "lotId": 1,
       "code": "B1",
@@ -56,18 +49,11 @@
       "status": "Free"
     },
     {
-      "id": 1763156494757,
-      "lotId": 1,
-      "code": "B4",
-      "type": "EV",
-      "status": "Free"
-    },
-    {
       "id": 1763156502730,
       "lotId": 1,
       "code": "C1",
       "type": "Regular",
-      "status": "Occupied"
+      "status": "Free"
     },
     {
       "id": 1763156509758,
@@ -84,18 +70,18 @@
       "status": "Free"
     },
     {
-      "id": 1763156519947,
+      "id": 1763584092048,
       "lotId": 1,
-      "code": "C4",
-      "type": "EV",
-      "status": "Free"
-    },
-    {
-      "id": 1763582126336,
-      "lotId": 1,
-      "code": "C12",
+      "code": "C5",
       "type": "Unavailable",
       "status": "Unavailable"
+    },
+    {
+      "id": 1763585995736,
+      "lotId": 1,
+      "code": "A4",
+      "type": "EV",
+      "status": "Free"
     }
   ],
   "tariffs": [

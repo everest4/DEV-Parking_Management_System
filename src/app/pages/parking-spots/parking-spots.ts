@@ -25,7 +25,12 @@ import { environment } from '../../../environments/environment';
 })
 export class ParkingSpotsPage implements OnInit {
 
+
   spots: any[] = [];
+  timers: { [id: number]: string } = {};
+  timerIntervals: { [id: number]: any } = {};
+ 
+
   filteredSpots: any[] = [];
 
   filter = 'all';
@@ -66,4 +71,38 @@ export class ParkingSpotsPage implements OnInit {
     this.filter = value;
     this.applyFilter();
   }
+
+  formatTime(seconds: number): string {
+  const h = Math.floor(seconds / 3600).toString().padStart(2, '0');
+  const m = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
+  const s = Math.floor(seconds % 60).toString().padStart(2, '0');
+  return `${h}:${m}:${s}`;
+  }
+
+  startTimer(spotId: number) {
+  const key = `timer_${spotId}`;
+
+  // Save the start time if not present
+  if (!localStorage.getItem(key)) {
+        localStorage.setItem(key, Date.now().toString());
+    }
+
+    // Update timer every second
+    this.timerIntervals[spotId] = setInterval(() => {
+        const start = Number(localStorage.getItem(key));
+        const elapsedSeconds = (Date.now() - start) / 1000;
+        this.timers[spotId] = this.formatTime(elapsedSeconds);
+    }, 1000);
+  }
+
+  stopTimer(spotId: number) {
+    clearInterval(this.timerIntervals[spotId]);
+    delete this.timerIntervals[spotId];
+
+    localStorage.removeItem(`timer_${spotId}`);
+    this.timers[spotId] = '00:00:00';
+  }
+
+
+
 }
