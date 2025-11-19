@@ -25,21 +25,21 @@
       "lotId": 1,
       "code": "A1",
       "type": "Regular",
-      "status": "Occupied"
+      "status": "Free"
     },
     {
       "id": 1763156408662,
       "lotId": 1,
       "code": "A2",
       "type": "Regular",
-      "status": "Occupied"
+      "status": "Free"
     },
     {
       "id": 1763156413908,
       "lotId": 1,
       "code": "A3",
       "type": "Regular",
-      "status": "Occupied"
+      "status": "Free"
     },
     {
       "id": 1763156472144,
@@ -82,6 +82,27 @@
       "code": "A4",
       "type": "EV",
       "status": "Free"
+    },
+    {
+      "id": 1763592264604,
+      "lotId": 1,
+      "code": "A6",
+      "type": "Regular",
+      "status": "Free"
+    },
+    {
+      "id": 1763592278114,
+      "lotId": 1,
+      "code": "B3",
+      "type": "EV",
+      "status": "Free"
+    },
+    {
+      "id": 1763592287073,
+      "lotId": 1,
+      "code": "C16",
+      "type": "Unavailable",
+      "status": "Unavailable"
     }
   ],
   "tariffs": [
@@ -109,7 +130,7 @@
       "max": 300,
       "price": 500
     },
-    {
+    { 
       "id": 1763591574340,
       "min": 301,
       "max": 480,
@@ -152,6 +173,14 @@
       "price": 0,
       "createdAt": "2025-11-19T22:40:42.224Z",
       "id": 3
+    },
+    {
+      "spotId": 1763156403951,
+      "spotCode": "A1",
+      "durationMinutes": 6,
+      "price": 0,
+      "createdAt": "2025-11-19T22:43:24.348Z",
+      "id": 4
     }
   ],
   "payments": []
