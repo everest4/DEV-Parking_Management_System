@@ -13,84 +13,87 @@
     <p class="error">{{ error }}</p>
   }
 
-<mat-card class="add-card">
-  <h2>Add New Parking Spot</h2>
+  <!-- ADD SPOT FORM -->
+  <mat-card class="add-card">
+    <h2>Add New Parking Spot</h2>
 
-  <form [formGroup]="addSpotForm" class="add-form">
+    <form [formGroup]="addSpotForm" class="add-form">
 
-    <!-- FLOOR DROPDOWN -->
-    <mat-form-field appearance="outline" class="wide-field">
-      <mat-label>Floor</mat-label>
-      <mat-select formControlName="floor">
-        <mat-option value="A">A</mat-option>
-        <mat-option value="B">B</mat-option>
-        <mat-option value="C">C</mat-option>
-      </mat-select>
-    </mat-form-field>
+      <!-- FLOOR SELECT -->
+      <mat-form-field appearance="outline">
+        <mat-label>Floor</mat-label>
+        <mat-select formControlName="floor">
+          <mat-option value="A">A</mat-option>
+          <mat-option value="B">B</mat-option>
+          <mat-option value="C">C</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <!-- NUMBER (1–30) -->
-    <mat-form-field appearance="outline" class="wide-field">
-      <mat-label>Number</mat-label>
-      <input
-        matInput
-        type="number"
-        min="1"
-        max="30"
-        formControlName="number"
-      >
-    </mat-form-field>
+      <!-- NUMBER SELECT -->
+      <mat-form-field appearance="outline">
+        <mat-label>Number</mat-label>
+        <mat-select formControlName="number">
+          @for (num of numbers; track num) {
+            <mat-option [value]="num">{{ num }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
 
-    <!-- TYPE -->
-    <mat-form-field appearance="outline" class="wide-field">
-      <mat-label>Type</mat-label>
-      <mat-select formControlName="type">
-        <mat-option value="Regular">Regular</mat-option>
-        <mat-option value="EV">EV</mat-option>
-      </mat-select>
-    </mat-form-field>
+      <!-- TYPE SELECT -->
+      <mat-form-field appearance="outline">
+        <mat-label>Type</mat-label>
+        <mat-select formControlName="type">
+          <mat-option value="Regular">Regular</mat-option>
+          <mat-option value="EV">EV</mat-option>
+          <mat-option value="Unavailable">Unavailable</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <button mat-raised-button color="primary" (click)="addSpot()" class="add-btn">
-      <mat-icon>add_circle</mat-icon> Add Spot
-    </button>
-
-  </form>
-</mat-card>
+      <button mat-raised-button color="primary" (click)="addSpot()" class="add-btn">
+        <mat-icon>add_circle</mat-icon> Add Spot
+      </button>
+    </form>
+  </mat-card>
 
   <!-- SPOTS GRID -->
   <div class="spots-grid">
 
     @for (spot of spots; track spot.id) {
 
-      <mat-card class="spot-card" [class.free]="spot.status === 'Free'" [class.occupied]="spot.status === 'Occupied'" [class.ev]="spot.type === 'EV'">
+      <mat-card
+        class="spot-card"
+        [class.free]="spot.status === 'Free'"
+        [class.occupied]="spot.status === 'Occupied'"
+        [class.ev]="spot.type === 'EV'"
+        [class.unavailable]="spot.type === 'Unavailable'"
+      >
 
-        <!-- Top right menu -->
+        <!-- MENU -->
         <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-btn">
           <mat-icon>more_vert</mat-icon>
         </button>
 
         <mat-menu #menu="matMenu">
           <button mat-menu-item (click)="deleteSpot(spot)">
-            <mat-icon>delete</mat-icon>
-            Delete Spot
+            <mat-icon>delete</mat-icon> Delete Spot
           </button>
         </mat-menu>
 
-        <!-- Spot Code -->
         <mat-card-header>
           <mat-card-title>{{ spot.code }}</mat-card-title>
           <mat-card-subtitle>{{ spot.type }} • {{ spot.status }}</mat-card-subtitle>
         </mat-card-header>
 
-        <!-- Booking Buttons -->
+        <!-- ACTIONS -->
         <div class="card-actions">
 
           <button
             mat-raised-button
             color="primary"
-            *ngIf="spot.status === 'Free'"
+            *ngIf="spot.status === 'Free' && spot.type !== 'Unavailable'"
             (click)="bookSpot(spot)"
           >
-            <mat-icon>check_circle</mat-icon> Book Spot
+            <mat-icon>check_circle</mat-icon> Book
           </button>
 
           <button
@@ -99,7 +102,15 @@
             *ngIf="spot.status === 'Occupied'"
             (click)="unbookSpot(spot)"
           >
-            <mat-icon>cancel</mat-icon> Unbook Spot
+            <mat-icon>cancel</mat-icon> Unbook
+          </button>
+
+          <button
+            mat-raised-button
+            disabled
+            *ngIf="spot.type === 'Unavailable'"
+          >
+            <mat-icon>block</mat-icon> Unavailable
           </button>
 
         </div>

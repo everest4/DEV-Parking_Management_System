@@ -89,6 +89,13 @@
       "code": "C4",
       "type": "EV",
       "status": "Free"
+    },
+    {
+      "id": 1763582126336,
+      "lotId": 1,
+      "code": "C12",
+      "type": "Unavailable",
+      "status": "Unavailable"
     }
   ],
   "tariffs": [

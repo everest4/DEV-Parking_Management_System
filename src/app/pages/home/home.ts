@@ -8,9 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { environment } from '../../../environments/environment';
 import { MatMenuModule } from '@angular/material/menu';
-
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -34,57 +33,36 @@ export class HomePage implements OnInit {
   spots: any[] = [];
   loading = true;
   error = '';
+  numbers = Array.from({ length: 30 }, (_, i) => i + 1); // 1–30
 
   addSpotForm!: FormGroup;
 
   constructor(private http: HttpClient, private fb: FormBuilder) {}
 
   ngOnInit() {
-
-    // Create form
     this.addSpotForm = this.fb.group({
       floor: ['', Validators.required],
       number: ['', Validators.required],
-      type: ['Regular', Validators.required]
+      type: ['', Validators.required]
     });
 
-    // Load parking spots
     this.loadSpots();
   }
 
-  // LOAD SPOTS
   loadSpots() {
     this.http.get<any[]>(`${environment.apiUrl}/spots`).subscribe({
       next: res => {
         this.spots = res;
         this.loading = false;
       },
-      error: () => {
-        this.error = 'Failed to load spots';
-      }
+      error: () => this.error = 'Failed to load spots'
     });
-  }
-
-  // TOGGLE STATUS
-  toggleStatus(spot: any) {
-    const newStatus = spot.status === 'Free' ? 'Occupied' : 'Free';
-
-    this.http.patch(`${environment.apiUrl}/spots/${spot.id}`, { status: newStatus })
-      .subscribe({
-        next: () => spot.status = newStatus
-      });
   }
 
   addSpot() {
     if (this.addSpotForm.invalid) return;
 
     const { floor, number, type } = this.addSpotForm.value;
-
-    if (number < 1 || number > 30) {
-      alert("Spot number must be between 1 and 30.");
-      return;
-    }
-
     const code = `${floor}${number}`;
 
     if (this.spots.some(s => s.code.toLowerCase() === code.toLowerCase())) {
@@ -97,7 +75,7 @@ export class HomePage implements OnInit {
       lotId: 1,
       code,
       type,
-      status: 'Free'
+      status: type === 'Unavailable' ? 'Unavailable' : 'Free'
     };
 
     this.http.post(`${environment.apiUrl}/spots`, newSpot).subscribe({
@@ -107,46 +85,22 @@ export class HomePage implements OnInit {
     this.addSpotForm.reset();
   }
 
-
-  // DELETE SPOT
-  deleteSpot(spot: any) {
-    if (!confirm(`Delete spot ${spot.code}?`)) return;
-
-    this.http.delete(`${environment.apiUrl}/spots/${spot.id}`).subscribe({
-      next: () => this.spots = this.spots.filter(s => s.id !== spot.id)
-    });
-  }
-
   bookSpot(spot: any) {
-  if (spot.status !== 'Free') return;
+    if (spot.status !== 'Free' || spot.type === 'Unavailable') return;
 
-  const confirmed = confirm(`Book spot ${spot.code}?`);
-  if (!confirmed) return;
-
-  this.http.patch(`${environment.apiUrl}/spots/${spot.id}`, { status: 'Occupied' })
-    .subscribe({
-      next: () => {
-        spot.status = 'Occupied';
-        alert(`Spot ${spot.code} successfully booked!`);
-      }
-    });
+    this.http.patch(`${environment.apiUrl}/spots/${spot.id}`, { status: 'Occupied' })
+      .subscribe(() => spot.status = 'Occupied');
   }
 
   unbookSpot(spot: any) {
-  if (spot.status !== 'Occupied') return;
-
-  const confirmed = confirm(`Unbook spot ${spot.code}?`);
-  if (!confirmed) return;
-
-  this.http.patch(`${environment.apiUrl}/spots/${spot.id}`, { status: 'Free' })
-    .subscribe({
-      next: () => {
-        spot.status = 'Free';
-        alert(`Spot ${spot.code} is now free again.`);
-      }
-    });
+    this.http.patch(`${environment.apiUrl}/spots/${spot.id}`, { status: 'Free' })
+      .subscribe(() => spot.status = 'Free');
   }
 
-
-
+  deleteSpot(spot: any) {
+    this.http.delete(`${environment.apiUrl}/spots/${spot.id}`)
+      .subscribe(() =>
+        this.spots = this.spots.filter(s => s.id !== spot.id)
+      );
+  }
 }
