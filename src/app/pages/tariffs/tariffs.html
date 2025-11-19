@@ -1,30 +1,70 @@
-<div class="tariffs-container">
+<div class="tariffs-page">
 
   <h2>Parking Tariffs</h2>
 
-  @for (tariff of tariffs; track tariff.id) {
+  <!-- Add new tariff -->
+  <mat-card class="add-card">
+    <h3>Add New Tariff</h3>
 
-    <mat-card class="tariff-card">
+    <div class="add-grid">
+      <mat-form-field appearance="outline">
+        <mat-label>Min (minutes)</mat-label>
+        <input matInput type="number" [(ngModel)]="newMin">
+      </mat-form-field>
 
-      <div class="tariff-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Max (minutes)</mat-label>
+        <input matInput type="number" [(ngModel)]="newMax">
+      </mat-form-field>
 
-        <div class="label">
-          {{ tariff.label }}
+      <mat-form-field appearance="outline">
+        <mat-label>Price (LEK)</mat-label>
+        <input matInput type="number" [(ngModel)]="newPrice">
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" (click)="addTariff()">
+        <mat-icon>add</mat-icon> Add Tariff
+      </button>
+    </div>
+  </mat-card>
+
+  <!-- Tariffs Grid -->
+  <div class="tariffs-grid">
+
+    @for (tariff of tariffs; track tariff.id) {
+      <mat-card class="tariff-card">
+
+        <mat-card-title>
+        {{ formatDuration(tariff.min) }} → {{ formatDuration(tariff.max) }}
+        </mat-card-title>
+
+
+        <mat-card-content>
+
+          <label>Min</label>
+          <input matInput type="number" [(ngModel)]="tariff.min">
+
+          <label>Max</label>
+          <input matInput type="number" [(ngModel)]="tariff.max">
+
+          <label>Price (LEK)</label>
+          <input matInput type="number" [(ngModel)]="tariff.price">
+
+        </mat-card-content>
+
+        <div class="buttons">
+          <button mat-raised-button color="primary" (click)="saveTariff(tariff)">
+            Save
+          </button>
+
+          <button mat-raised-button color="warn" (click)="deleteTariff(tariff.id)">
+            Delete
+          </button>
         </div>
 
-        <mat-form-field appearance="outline" class="price-field">
-          <mat-label>Price (LEK)</mat-label>
-          <input matInput type="number" [(ngModel)]="tariff.price">
-        </mat-form-field>
+      </mat-card>
+    }
 
-        <button mat-raised-button color="primary" (click)="saveTariff(tariff)">
-          Save
-        </button>
-
-      </div>
-      
-    </mat-card>
-
-  }
+  </div>
 
 </div>

@@ -1,5 +1,5 @@
-.tickets-container {
-  max-width: 900px;
+.tickets-page {
+  max-width: 1000px;
   margin: 20px auto;
   padding: 20px;
 
@@ -8,36 +8,68 @@
     font-weight: 700;
     margin-bottom: 20px;
   }
+
+  h3 {
+    margin-top: 30px;
+    font-weight: 600;
+  }
 }
 
-.spots-grid, .tickets-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 20px;
-}
-
-.spot-card, .ticket-card {
-  padding: 20px;
-  border-radius: 14px;
+.info {
   text-align: center;
+  opacity: 0.8;
+}
+
+.error {
+  text-align: center;
+  color: #e53935;
+  margin-bottom: 10px;
+}
+
+.spots-grid,
+.tickets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 18px;
+  margin-top: 15px;
+}
+
+.spot-card,
+.ticket-card {
+  padding: 18px;
+  border-radius: 16px;
+  text-align: left;
   box-shadow: 0 3px 10px rgba(0,0,0,0.08);
 
   button {
     margin-top: 12px;
     width: 100%;
     border-radius: 10px;
+    text-transform: none;
+    font-weight: 600;
   }
 }
 
 .price {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  color: #007aff;
+  color: #1976d2;
 }
 
+.timestamp {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+/* Dark mode */
 .dark-mode .spot-card,
 .dark-mode .ticket-card {
   background: #1e1e1e !important;
   color: white !important;
   box-shadow: 0 3px 10px rgba(255,255,255,0.08);
+}
+
+.dark-mode .price {
+  color: #64b5f6;
 }

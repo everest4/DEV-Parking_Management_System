@@ -1,39 +1,69 @@
-<div class="tickets-container">
+<div class="tickets-page">
 
-  <h2>Generate Parking Tickets</h2>
+  <h2>Tickets</h2>
 
-  <!-- OCCUPIED SPOTS LIST -->
+  @if (loading) {
+    <p class="info">Loading data...</p>
+  }
+
+  @if (error) {
+    <p class="error">{{ error }}</p>
+  }
+
+  @if (!loading && !error && occupiedSpots.length === 0) {
+    <p class="info">No occupied spots at the moment.</p>
+  }
+
+  <!-- OCCUPIED SPOTS WITH PRICE PREVIEW -->
   <div class="spots-grid">
-    @for (spot of spots; track spot.id) {
+    @for (entry of occupiedSpots; track entry.spot.id) {
+
       <mat-card class="spot-card">
 
-        <mat-card-title>{{ spot.code }}</mat-card-title>
-        <mat-card-subtitle>
-          Occupied for: {{ getElapsedMinutes(spot.id) }} min
-        </mat-card-subtitle>
+        <mat-card-header>
+          <mat-card-title>{{ entry.spot.code }}</mat-card-title>
+          <mat-card-subtitle>
+            {{ entry.spot.type }} • Occupied
+          </mat-card-subtitle>
+        </mat-card-header>
 
-        <button mat-raised-button color="primary" (click)="generateTicket(spot)">
+        <mat-card-content>
+          <p><strong>Duration:</strong> {{ entry.minutes }} min ({{ formatDuration(entry.minutes) }})</p>
+          <p><strong>Price:</strong> <span class="price">{{ entry.price }} LEK</span></p>
+        </mat-card-content>
+
+        <button mat-raised-button color="primary" (click)="generateTicket(entry)">
+          <mat-icon>receipt_long</mat-icon>
           Generate Ticket
         </button>
 
       </mat-card>
+
     }
   </div>
 
-  <!-- GENERATED TICKETS -->
-  <h3 *ngIf="tickets.length > 0">Generated Tickets</h3>
+  <!-- GENERATED TICKETS LIST -->
+  @if (generatedTickets.length > 0) {
 
-  <div class="tickets-grid">
-    @for (ticket of tickets; track ticket.id) {
-      <mat-card class="ticket-card">
-        <mat-card-title>Ticket #{{ ticket.id }}</mat-card-title>
+    <h3>Generated Tickets</h3>
 
-        <p><strong>Spot:</strong> {{ ticket.spot }}</p>
-        <p><strong>Time:</strong> {{ ticket.time }} min</p>
-        <p><strong>Price:</strong> <span class="price">{{ ticket.price }} LEK</span></p>
+    <div class="tickets-grid">
+      @for (t of generatedTickets; track t.id ?? t.spotCode + t.createdAt) {
 
-      </mat-card>
-    }
-  </div>
+        <mat-card class="ticket-card">
+          <mat-card-title>Ticket #{{ t.id }}</mat-card-title>
+
+          <p><strong>Spot:</strong> {{ t.spotCode }}</p>
+          <p><strong>Duration:</strong> {{ t.durationMinutes }} min</p>
+          <p><strong>Price:</strong> <span class="price">{{ t.price }} LEK</span></p>
+          <p class="timestamp">
+            {{ t.createdAt | date:'short' }}
+          </p>
+        </mat-card>
+
+      }
+    </div>
+
+  }
 
 </div>

@@ -46,7 +46,7 @@
       "lotId": 1,
       "code": "B1",
       "type": "Regular",
-      "status": "Occupied"
+      "status": "Free"
     },
     {
       "id": 1763156502730,
@@ -86,14 +86,73 @@
   ],
   "tariffs": [
     {
-      "id": 1,
-      "lotId": 1,
-      "ratePerHour": 2,
-      "gracePeriod": 15,
-      "billingPeriod": 30,
-      "price": 97
+      "id": 1763591160658,
+      "min": 0,
+      "max": 10,
+      "price": 0
+    },
+    {
+      "id": 1763591186862,
+      "min": 11,
+      "max": 60,
+      "price": 100
+    },
+    {
+      "id": 1763591547343,
+      "min": 61,
+      "max": 180,
+      "price": 200
+    },
+    {
+      "id": 1763591560292,
+      "min": 181,
+      "max": 300,
+      "price": 500
+    },
+    {
+      "id": 1763591574340,
+      "min": 301,
+      "max": 480,
+      "price": 1000
+    },
+    {
+      "id": 1763591587682,
+      "min": 481,
+      "max": 720,
+      "price": 1500
+    },
+    {
+      "id": 1763591600624,
+      "min": 721,
+      "max": 1440,
+      "price": 2000
     }
   ],
-  "tickets": [],
+  "tickets": [
+    {
+      "spotId": 1763156403951,
+      "spotCode": "A1",
+      "durationMinutes": 45,
+      "price": 100,
+      "createdAt": "2025-11-19T22:36:54.143Z",
+      "id": 1
+    },
+    {
+      "spotId": 1763156403951,
+      "spotCode": "A1",
+      "durationMinutes": 0,
+      "price": 2000,
+      "createdAt": "2025-11-19T22:37:28.129Z",
+      "id": 2
+    },
+    {
+      "spotId": 1763156403951,
+      "spotCode": "A1",
+      "durationMinutes": 3,
+      "price": 0,
+      "createdAt": "2025-11-19T22:40:42.224Z",
+      "id": 3
+    }
+  ],
   "payments": []
 }
