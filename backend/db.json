@@ -3,17 +3,19 @@
     {
       "email": "admin@test.com",
       "password": "admin123",
-      "role": "Admin"
+      "role": "Admin",
+      "id": "929f"
     },
     {
       "email": "attendant@test.com",
       "password": "attendant123",
-      "role": "Attendant"
+      "role": "Attendant",
+      "id": "7482"
     }
   ],
   "lots": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Main Lot",
       "address": "Downtown",
       "timezone": "Europe/Tirane"
@@ -21,129 +23,136 @@
   ],
   "spots": [
     {
-      "id": 1763156403951,
+      "id": "1763156403951",
       "lotId": 1,
       "code": "A1",
       "type": "Regular",
       "status": "Free"
     },
     {
-      "id": 1763156408662,
+      "id": "1763156408662",
       "lotId": 1,
       "code": "A2",
       "type": "Regular",
       "status": "Free"
     },
     {
-      "id": 1763156413908,
+      "id": "1763156413908",
       "lotId": 1,
       "code": "A3",
       "type": "Regular",
-      "status": "Free"
+      "status": "Occupied"
     },
     {
-      "id": 1763156472144,
+      "id": "1763156472144",
       "lotId": 1,
       "code": "B1",
       "type": "Regular",
       "status": "Free"
     },
     {
-      "id": 1763156502730,
+      "id": "1763156502730",
       "lotId": 1,
       "code": "C1",
       "type": "Regular",
       "status": "Free"
     },
     {
-      "id": 1763156509758,
+      "id": "1763156509758",
       "lotId": 1,
       "code": "C2",
       "type": "Regular",
       "status": "Free"
     },
     {
-      "id": 1763156513756,
+      "id": "1763156513756",
       "lotId": 1,
       "code": "C3",
       "type": "Regular",
       "status": "Free"
     },
     {
-      "id": 1763584092048,
+      "id": "1763584092048",
       "lotId": 1,
       "code": "C5",
       "type": "Unavailable",
       "status": "Unavailable"
     },
     {
-      "id": 1763585995736,
+      "id": "1763585995736",
       "lotId": 1,
       "code": "A4",
       "type": "EV",
       "status": "Free"
     },
     {
-      "id": 1763592264604,
+      "id": "1763592264604",
       "lotId": 1,
       "code": "A6",
       "type": "Regular",
       "status": "Free"
     },
     {
-      "id": 1763592278114,
+      "id": "1763592278114",
       "lotId": 1,
       "code": "B3",
       "type": "EV",
       "status": "Free"
     },
     {
-      "id": 1763592287073,
+      "id": "1763592287073",
       "lotId": 1,
       "code": "C16",
       "type": "Unavailable",
       "status": "Unavailable"
+    },
+    {
+      "id": 1763727617075,
+      "lotId": 1,
+      "code": "B12",
+      "type": "Regular",
+      "status": "Free"
     }
   ],
   "tariffs": [
     {
-      "id": 1763591160658,
+      "id": "1763591160658",
       "min": 0,
       "max": 10,
       "price": 0
     },
     {
-      "id": 1763591186862,
+      "id": "1763591186862",
       "min": 11,
       "max": 60,
       "price": 100
     },
     {
-      "id": 1763591547343,
+      "id": "1763591547343",
       "min": 61,
       "max": 180,
       "price": 200
     },
     {
-      "id": 1763591560292,
+      "id": "1763591560292",
       "min": 181,
       "max": 300,
       "price": 500
     },
-    { 
-      "id": 1763591574340,
+    {
+      "id": "1763591574340",
       "min": 301,
       "max": 480,
       "price": 1000
     },
     {
-      "id": 1763591587682,
+      "id": "1763591587682",
       "min": 481,
       "max": 720,
       "price": 1500
     },
     {
-      "id": 1763591600624,
+      "id": "1763591600624",
       "min": 721,
       "max": 1440,
       "price": 2000
@@ -156,7 +165,7 @@
       "durationMinutes": 45,
       "price": 100,
       "createdAt": "2025-11-19T22:36:54.143Z",
-      "id": 1
+      "id": "1"
     },
     {
       "spotId": 1763156403951,
@@ -164,7 +173,7 @@
       "durationMinutes": 0,
       "price": 2000,
       "createdAt": "2025-11-19T22:37:28.129Z",
-      "id": 2
+      "id": "2"
     },
     {
       "spotId": 1763156403951,
@@ -172,7 +181,7 @@
       "durationMinutes": 3,
       "price": 0,
       "createdAt": "2025-11-19T22:40:42.224Z",
-      "id": 3
+      "id": "3"
     },
     {
       "spotId": 1763156403951,
@@ -180,7 +189,15 @@
       "durationMinutes": 6,
       "price": 0,
       "createdAt": "2025-11-19T22:43:24.348Z",
-      "id": 4
+      "id": "4"
+    },
+    {
+      "id": "ed5d",
+      "spotId": "1763156403951",
+      "spotCode": "A1",
+      "durationMinutes": 768,
+      "price": 2000,
+      "createdAt": "2025-11-21T12:21:33.577Z"
     }
   ],
   "payments": []

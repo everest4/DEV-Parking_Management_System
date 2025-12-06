@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { User } from '../models/user.model';
@@ -8,9 +8,8 @@ import { map } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private apiUrl = 'http://localhost:3001/users';
-
-  constructor(private http: HttpClient, private router: Router) {}
-
+  private http = inject(HttpClient)
+  private router = inject(Router)
   login(username: string, password: string): Observable<User | null> {
     return this.http.get<User[]>(`${this.apiUrl}?username=${username}`).pipe(
       map(users => {
