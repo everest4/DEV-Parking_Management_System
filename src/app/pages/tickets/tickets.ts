@@ -8,14 +8,14 @@ import { environment } from '../../../environments/environment';
 
 interface Tariff {
   id: number;
-  min: number;    // min minutes (inclusive, or boundary)
-  max: number;    // max minutes
-  price: number;  // LEK
+  min: number;   // minutes
+  max: number;   // minutes
+  price: number; // LEK
 }
 
 interface OccupiedSpotVM {
   spot: any;
-  minutes: number;
+  seconds: number; 
   price: number;
 }
 
@@ -46,22 +46,25 @@ export class TicketsPage implements OnInit {
     this.loadData();
   }
 
-  // Load tariffs then spots
+  // Load tariffs then occupied spots
   loadData() {
     this.http.get<Tariff[]>(`${environment.apiUrl}/tariffs`).subscribe({
       next: tariffsRes => {
-        // sort by min minutes just in case
+
         this.tariffs = tariffsRes.sort((a, b) => a.min - b.min);
 
-        // now load spots
         this.http.get<any[]>(`${environment.apiUrl}/spots`).subscribe({
           next: spotsRes => {
+
             const occupied = spotsRes.filter(s => s.status === 'Occupied');
+
             this.occupiedSpots = occupied.map(spot => {
-              const minutes = this.getElapsedMinutes(spot.id);
+              const seconds = this.getElapsedSeconds(spot.id);
+              const minutes = seconds / 60;
               const price = this.calculatePrice(minutes);
-              return { spot, minutes, price };
+              return { spot, seconds, price };
             });
+
             this.loading = false;
           },
           error: () => {
@@ -69,6 +72,7 @@ export class TicketsPage implements OnInit {
             this.loading = false;
           }
         });
+
       },
       error: () => {
         this.error = 'Failed to load tariffs';
@@ -77,49 +81,42 @@ export class TicketsPage implements OnInit {
     });
   }
 
-  // Read start time from localStorage (set in Home page timers)
-  getElapsedMinutes(spotId: number): number {
+  // Timestamp → seconds
+  getElapsedSeconds(spotId: number): number {
     const key = `timer_${spotId}`;
     const start = Number(localStorage.getItem(key));
 
     if (!start) return 0;
 
     const ms = Date.now() - start;
-    return Math.floor(ms / 60000); // minutes
+    const seconds = Math.floor(ms / 1000);
+    return seconds < 0 ? 0 : seconds;
   }
 
-  // Use tariffs from db.json to compute price
+  // Tariff lookup
   calculatePrice(minutes: number): number {
-    // 0–10 min free logic from your description
-    // and then apply banded tariffs
-
-    // find the FIRST tariff where minutes is in (min, max]
-    const match = this.tariffs.find(t => minutes > t.min && minutes <= t.max);
-
-    if (match) return match.price;
-
-    // if beyond all defined bands, use the highest one
-    if (this.tariffs.length > 0) {
-      return this.tariffs[this.tariffs.length - 1].price;
-    }
-
-    return 0;
+    const match = this.tariffs.find(
+      t => minutes >= t.min && minutes <= t.max
+    );
+    return match ? match.price : 0;
   }
 
-  // Format minutes into HH:MM:SS
-  formatDuration(minutes: number): string {
-    const totalSeconds = minutes * 60;
-    const h = Math.floor(totalSeconds / 3600).toString().padStart(2, '0');
-    const m = Math.floor((totalSeconds % 3600) / 60).toString().padStart(2, '0');
-    const s = Math.floor(totalSeconds % 60).toString().padStart(2, '0');
+  // Format HH:MM:SS
+  formatDuration(seconds: number): string {
+    const h = Math.floor(seconds / 3600).toString().padStart(2, '0');
+    const m = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
+    const s = Math.floor(seconds % 60).toString().padStart(2, '0');
     return `${h}:${m}:${s}`;
   }
 
   generateTicket(entry: OccupiedSpotVM) {
+
+    const durationMinutes = Math.floor(entry.seconds / 60);
+
     const payload = {
       spotId: entry.spot.id,
       spotCode: entry.spot.code,
-      durationMinutes: entry.minutes,
+      durationMinutes,
       price: entry.price,
       createdAt: new Date().toISOString()
     };
@@ -130,7 +127,7 @@ export class TicketsPage implements OnInit {
         alert(
           `Ticket generated:\n` +
           `Spot: ${created.spotCode}\n` +
-          `Time: ${created.durationMinutes} min\n` +
+          `Time: ${this.formatDuration(entry.seconds)}\n` +
           `Price: ${created.price} LEK`
         );
       },

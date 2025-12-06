@@ -28,8 +28,16 @@
         </mat-card-header>
 
         <mat-card-content>
-          <p><strong>Duration:</strong> {{ entry.minutes }} min ({{ formatDuration(entry.minutes) }})</p>
-          <p><strong>Price:</strong> <span class="price">{{ entry.price }} LEK</span></p>
+          <p>
+            <strong>Duration:</strong>
+            <!-- REAL SECONDS -->
+            {{ formatDuration(entry.seconds) }}
+          </p>
+
+          <p>
+            <strong>Price:</strong>
+            <span class="price">{{ entry.price }} LEK</span>
+          </p>
         </mat-card-content>
 
         <button mat-raised-button color="primary" (click)="generateTicket(entry)">
