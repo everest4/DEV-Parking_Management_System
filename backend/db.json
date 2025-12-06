@@ -41,7 +41,7 @@
       "lotId": 1,
       "code": "A3",
       "type": "Regular",
-      "status": "Occupied"
+      "status": "Free"
     },
     {
       "id": "1763156472144",
@@ -112,6 +112,13 @@
       "code": "B12",
       "type": "Regular",
       "status": "Free"
+    },
+    {
+      "id": 1765022760364,
+      "lotId": 1,
+      "code": "A26",
+      "type": "Unavailable",
+      "status": "Unavailable"
     }
   ],
   "tariffs": [
@@ -198,6 +205,14 @@
       "durationMinutes": 768,
       "price": 2000,
       "createdAt": "2025-11-21T12:21:33.577Z"
+    },
+    {
+      "spotId": "1763156413908",
+      "spotCode": "A3",
+      "durationMinutes": 21562,
+      "price": 2000,
+      "createdAt": "2025-12-06T12:00:46.411Z",
+      "id": "roUToTF"
     }
   ],
   "payments": []
