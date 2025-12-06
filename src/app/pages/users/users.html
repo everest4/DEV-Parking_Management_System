@@ -1,6 +1,89 @@
-<mat-card>
-  <mat-card-title>Users</mat-card-title>
-  <mat-card-content>
-    <pre>{{ users | json }}</pre>
-  </mat-card-content>
-</mat-card>
+<div class="users-container">
+
+  <h2>Users</h2>
+
+  @if (loading) {
+    <p class="info">Loading users...</p>
+  }
+
+  @if (error) {
+    <p class="error">{{ error }}</p>
+  }
+
+  <!-- FORM CARD -->
+  <mat-card class="user-form-card">
+    <h3>{{ editingUser ? 'Edit User' : 'Add User' }}</h3>
+
+    <form [formGroup]="userForm" class="user-form">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role">
+          <mat-option value="admin">Admin</mat-option>
+          <mat-option value="staff">Staff</mat-option>
+          <mat-option value="viewer">Viewer</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="buttons">
+        <button mat-raised-button color="primary" (click)="saveUser()">
+          {{ editingUser ? 'Save Changes' : 'Add User' }}
+        </button>
+
+        @if (editingUser) {
+          <button mat-raised-button color="warn" (click)="cancelEdit()">
+            Cancel
+          </button>
+        }
+      </div>
+
+    </form>
+  </mat-card>
+
+  <!-- USERS LIST -->
+  <h3>All Users</h3>
+
+  @if (!loading && users.length === 0) {
+    <p class="info">No users found.</p>
+  }
+
+  <div class="users-grid">
+    @for (u of users; track u.id) {
+      <mat-card class="user-card">
+
+        <mat-card-title>{{ u.name }}</mat-card-title>
+        <mat-card-subtitle>{{ u.email }}</mat-card-subtitle>
+
+        <p class="username">@{{ u.username }}</p>
+        <p class="role">Role: {{ u.role | uppercase }}</p>
+
+        <div class="card-buttons">
+          <button mat-icon-button color="primary" (click)="startEdit(u)" aria-label="Edit user">
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <button mat-icon-button color="warn" (click)="deleteUser(u)" aria-label="Delete user">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+
+      </mat-card>
+    }
+  </div>
+
+</div>
