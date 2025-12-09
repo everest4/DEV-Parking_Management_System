@@ -14,11 +14,18 @@
   padding: 16px;
   border-radius: 12px;
   margin-bottom: 25px;
+  background: rgb(232, 229, 218);
 
   .add-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 15px;
+  }
+
+  .buttons {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
   }
 }
 
@@ -27,10 +34,14 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 20px;
+  border-radius: 12px;
+  background: rgb(232, 229, 218);
+  padding: 20px;
 }
 
 .tariff-card {
   padding: 16px;
+  border-radius: 12px;
 
   mat-card-title {
     font-size: 1.2rem;
@@ -48,10 +59,12 @@
   .buttons {
     display: flex;
     gap: 10px;
+    border-radius: 12px;
   }
 }
 
 /* Dark mode */
+
 .dark-mode .tariff-card,
 .dark-mode .add-card {
   background: #1e1e1e;

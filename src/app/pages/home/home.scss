@@ -37,7 +37,7 @@
     grid-column: span 3;
     justify-self: start;
     border-radius: 10px;
-    background: linear-gradient( #6490bb,#2a5492); 
+    background: rgb(232, 229, 218); 
   }
 }
 
@@ -108,6 +108,10 @@
 /* -------------------------------------------------- */
 /* DARK MODE BASE */
 /* -------------------------------------------------- */
+:host-context(.dark-mode) .add-btn {
+  background: #262525 !important;
+}
+
 :host-context(.dark-mode) {
   .add-card,
   .spots-grid {

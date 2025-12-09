@@ -110,3 +110,16 @@ $dark-theme: mat.define-theme((
   background-color: #262525 !important; /* solid dark */
   border: 1px solid #2d2c2c !important;
 }
+
+:root {
+  --button-radius: 12px;
+}
+
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-outlined-button,
+.mat-mdc-unelevated-button,
+.mdc-button {
+  border-radius: var(--button-radius) !important;
+}
+
