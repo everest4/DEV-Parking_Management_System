@@ -1,6 +1,5 @@
 <div class="home-container">
 
-  <!-- LOADING -->
   @if (loading) {
     <div class="loading">
       <mat-icon>hourglass_top</mat-icon>
@@ -8,18 +7,15 @@
     </div>
   }
 
-  <!-- ERROR -->
   @if (error) {
     <p class="error">{{ error }}</p>
   }
 
-  <!-- ADD SPOT FORM -->
   <mat-card class="add-card">
     <h2>Add New Parking Spot</h2>
 
     <form [formGroup]="addSpotForm" class="add-form">
 
-      <!-- FLOOR SELECT -->
       <mat-form-field appearance="outline">
         <mat-label>Floor</mat-label>
         <mat-select formControlName="floor">
@@ -29,7 +25,6 @@
         </mat-select>
       </mat-form-field>
 
-      <!-- NUMBER SELECT -->
       <mat-form-field appearance="outline">
         <mat-label>Number</mat-label>
         <mat-select formControlName="number">
@@ -39,7 +34,6 @@
         </mat-select>
       </mat-form-field>
 
-      <!-- TYPE SELECT -->
       <mat-form-field appearance="outline">
         <mat-label>Type</mat-label>
         <mat-select formControlName="type">
@@ -55,7 +49,6 @@
     </form>
   </mat-card>
 
-  <!-- SPOTS GRID -->
   <div class="spots-grid">
 
     @for (spot of spots; track spot.id) {
@@ -68,7 +61,6 @@
         [class.unavailable]="spot.type === 'Unavailable'"
       >
 
-        <!-- MENU -->
         <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-btn">
           <mat-icon>more_vert</mat-icon>
         </button>
@@ -93,7 +85,6 @@
 
         </mat-card-header>
 
-        <!-- ACTIONS -->
         <div class="card-actions">
           <button
             mat-raised-button

@@ -15,7 +15,7 @@ export class AuthService {
       map(users => {
         const user = users[0];
         if (user && user.password === password) {
-          // Save user for session
+
           localStorage.setItem('user', JSON.stringify(user));
           return user;
         }

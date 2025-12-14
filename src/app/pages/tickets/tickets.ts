@@ -8,9 +8,9 @@ import { environment } from '../../../environments/environment';
 
 interface Tariff {
   id: number;
-  min: number;   // minutes
-  max: number;   // minutes
-  price: number; // LEK
+  min: number; 
+  max: number; 
+  price: number; 
 }
 
 interface OccupiedSpotVM {
@@ -46,7 +46,6 @@ export class TicketsPage implements OnInit {
     this.loadData();
   }
 
-  // Load tariffs then occupied spots
   loadData() {
     this.http.get<Tariff[]>(`${environment.apiUrl}/tariffs`).subscribe({
       next: tariffsRes => {
@@ -81,7 +80,6 @@ export class TicketsPage implements OnInit {
     });
   }
 
-  // Timestamp → seconds
   getElapsedSeconds(spotId: number): number {
     const key = `timer_${spotId}`;
     const start = Number(localStorage.getItem(key));
@@ -93,7 +91,6 @@ export class TicketsPage implements OnInit {
     return seconds < 0 ? 0 : seconds;
   }
 
-  // Tariff lookup
   calculatePrice(minutes: number): number {
     const match = this.tariffs.find(
       t => minutes >= t.min && minutes <= t.max
@@ -101,7 +98,6 @@ export class TicketsPage implements OnInit {
     return match ? match.price : 0;
   }
 
-  // Format HH:MM:SS
   formatDuration(seconds: number): string {
     const h = Math.floor(seconds / 3600).toString().padStart(2, '0');
     const m = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
@@ -120,20 +116,17 @@ export class TicketsPage implements OnInit {
       createdAt: new Date().toISOString()
     };
 
-    // 1) Create the ticket
     this.http.post(`${environment.apiUrl}/tickets`, payload).subscribe({
       next: (created: any) => {
         this.generatedTickets.push(created);
 
-        // 2) Set the spot to Free in backend
         this.http
           .patch(`${environment.apiUrl}/spots/${entry.spot.id}`, { status: 'Free' })
           .subscribe({
             next: () => {
-              // 3) Remove timer for that spot
+
               localStorage.removeItem(`timer_${entry.spot.id}`);
 
-              // 4) Remove it from the occupied list in the UI
               this.occupiedSpots = this.occupiedSpots.filter(
                 s => s.spot.id !== entry.spot.id
               );

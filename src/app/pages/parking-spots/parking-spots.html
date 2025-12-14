@@ -1,6 +1,5 @@
 <div class="page-container">
 
-  <!-- Filter Bar -->
   <div class="filter-bar">
     <mat-select [(value)]="filter" (selectionChange)="changeFilter($event.value)">
       <mat-option value="all">All Spots</mat-option>
@@ -10,7 +9,6 @@
     </mat-select>
   </div>
 
-  <!-- Spots Grid -->
   <div class="spots-grid">
 
     @for (spot of filteredSpots; track spot.id) {

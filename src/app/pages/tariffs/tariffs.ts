@@ -35,7 +35,6 @@ export class TariffsPage implements OnInit {
   tariffs: Tariff[] = [];
   loading = true;
 
-  // Local fields for creating a new tariff
   newMin: number | null = null;
   newMax: number | null = null;
   newPrice: number | null = null;
@@ -117,7 +116,6 @@ export class TariffsPage implements OnInit {
 
     value = value.toLowerCase().trim();
 
-    // If input is plain number → treat as minutes
     if (/^\d+$/.test(value)) return parseInt(value, 10);
 
     let total = 0;
@@ -128,7 +126,6 @@ export class TariffsPage implements OnInit {
     if (hourMatch) total += parseInt(hourMatch[1], 10) * 60;
     if (minMatch) total += parseInt(minMatch[1], 10);
 
-    // support "1:30"
     if (value.includes(':')) {
         const [h, m] = value.split(':');
         total = Number(h) * 60 + Number(m);

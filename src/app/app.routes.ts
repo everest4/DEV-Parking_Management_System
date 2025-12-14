@@ -4,13 +4,10 @@ import { LayoutPage } from './layout/layout';
 
 export const routes: Routes = [
 
-  // Redirect to login by default
   { path: '', redirectTo: 'login', pathMatch: 'full' },
 
-  // Login does NOT use layout
   { path: 'login', component: LoginPage },
 
-  // Main layout wraps all authenticated pages
   {
     path: '',
     component: LayoutPage,
@@ -47,6 +44,5 @@ export const routes: Routes = [
     ]
   },
 
-  // Fallback
   { path: '**', redirectTo: 'login' }
 ];

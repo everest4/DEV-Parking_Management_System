@@ -82,12 +82,10 @@ export class ParkingSpotsPage implements OnInit {
   startTimer(spotId: number) {
   const key = `timer_${spotId}`;
 
-  // Save the start time if not present
   if (!localStorage.getItem(key)) {
         localStorage.setItem(key, Date.now().toString());
     }
 
-    // Update timer every second
     this.timerIntervals[spotId] = setInterval(() => {
         const start = Number(localStorage.getItem(key));
         const elapsedSeconds = (Date.now() - start) / 1000;

@@ -57,36 +57,27 @@
   }
 }
 
-/* -------------------------------------------------- */
-/* DARK MODE */
-/* -------------------------------------------------- */
-
-/* GRID background */
 :host-context(.dark-mode) .tariffs-grid {
   background: #2c2c2c !important;
   color: white !important;
 }
 
-/* Add CARD background */
 :host-context(.dark-mode) .add-card {
   background: #2c2c2c!important;
   color: white !important;
 }
 
-/* INPUTS */
 :host-context(.dark-mode) input {
   background: #2c2c2c !important;
   color: white !important;
   border: none;
 }
 
-/* BUTTONS */
 :host-context(.dark-mode) button {
   background: #262525 !important;
   color: white !important;
 }
 
-/* TITLES */
 :host-context(.dark-mode) mat-card-title {
   color: white !important;
 }

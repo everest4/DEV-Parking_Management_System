@@ -1,12 +1,8 @@
-/* Layout background */
 .layout-container {
   height: 100vh;
-  background: #fafafa; /* Instagram gray */
+  background: #fafafa; 
 }
 
-/* ---------------------
-   TOP BAR (Instagram Style)
----------------------- */
 .topbar {
   height: 55px;
   background: #fafafa;
@@ -47,9 +43,6 @@
   }
 }
 
-/* ---------------------
-   SIDEBAR
----------------------- */
 .sidebar {
   width: 250px;
   background: #fafafa;
@@ -57,7 +50,6 @@
   padding: 20px 0;
 }
 
-/* Sidebar header */
 .sidebar-header {
   display: flex;
   align-items: center;
@@ -77,7 +69,6 @@
   }
 }
 
-/* Nav List */
 mat-nav-list a {
   border-radius: 8px;
   padding: 12px 14px;
@@ -103,7 +94,6 @@ mat-nav-list a:hover {
   color: #0095f6 !important;
 }
 
-/* Content */
 .content-area {
   background: #ffffff;
 }

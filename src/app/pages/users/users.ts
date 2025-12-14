@@ -42,7 +42,7 @@ export class UsersPage implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // FIXED: you MUST create the form here
+
     this.userForm = this.fb.group({
       name: ['', Validators.required],
       surname: [''],
@@ -78,7 +78,7 @@ export class UsersPage implements OnInit {
       surname: user.surname ?? '',
       email: user.email,
       username: user.username,
-      password: user.password, // keep existing password
+      password: user.password, 
       role: user.role
     });
   }
@@ -110,7 +110,7 @@ export class UsersPage implements OnInit {
         this.cancelEdit();
       });
     } else {
-      // CREATE USER
+      // CREATE NEW USER
       const newUser: User = {
         id: String(Date.now()),
         name: form.name,

@@ -1,37 +1,25 @@
-/* -------------------------------------------------- */
-/* PAGE LAYOUT */
-/* -------------------------------------------------- */
 .page-container {
   padding: 1.5rem;
 }
 
-/* -------------------------------------------------- */
-/* FILTER BAR */
-/* -------------------------------------------------- */
 .filter-bar {
   width: 200px;
   margin-bottom: 1.5rem;
 }
 
-/* -------------------------------------------------- */
-/* GRID */
-/* -------------------------------------------------- */
 .spots-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 16px;
 }
 
-/* -------------------------------------------------- */
-/* CARD BASE STYLE */
-/* -------------------------------------------------- */
 .spot-card {
   text-align: center;
   padding: 1rem;
   border-radius: 16px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   background: white;
-  color: white; /* overwritten per status */
+  color: white; 
 
   &:hover {
     transform: translateY(-4px);
@@ -39,9 +27,6 @@
   }
 }
 
-/* -------------------------------------------------- */
-/* LIGHT MODE — STATUS COLORS */
-/* -------------------------------------------------- */
 .spot-card.free {
   background: #4caf50;
 }
@@ -58,17 +43,10 @@
   background: linear-gradient(135deg, #2196f3, #64b5f6);
 }
 
-/* -------------------------------------------------- */
-/* DARK MODE BASE */
-/* -------------------------------------------------- */
 :host-context(.dark-mode) .spot-card {
   background: #1e1e1e !important;
   color: white !important;
 }
-
-/* -------------------------------------------------- */
-/* DARK MODE — OVERRIDES PER TYPE */
-/* -------------------------------------------------- */
 
 :host-context(.dark-mode) .spot-card.free {
   background: #2e7d32 !important;
@@ -82,12 +60,10 @@
   background: #616161 !important;
 }
 
-/* EV dark mode gradient */
 :host-context(.dark-mode) .spot-card.ev {
   background: linear-gradient(135deg, #1565c0, #42a5f5) !important;
 }
 
-/* Optional: stronger hover in dark mode */
 :host-context(.dark-mode) .spot-card:hover {
   box-shadow: 0 6px 16px rgba(255,255,255,0.1);
 }

@@ -1,10 +1,5 @@
 @use '@angular/material' as mat;
 
-/* ============================================
-   MATERIAL THEMES
-   ============================================ */
-
-/* Light theme */
 $light-theme: mat.define-theme((
   color: (
     theme-type: light,
@@ -12,7 +7,6 @@ $light-theme: mat.define-theme((
   )
 ));
 
-/* Dark theme */
 $dark-theme: mat.define-theme((
   color: (
     theme-type: dark,
@@ -20,34 +14,25 @@ $dark-theme: mat.define-theme((
   )
 ));
 
-/* Default = light theme */
 @include mat.all-component-colors($light-theme);
 @include mat.all-component-typographies($light-theme);
 @include mat.all-component-densities($light-theme);
 
-/* Dark theme activation via .dark-mode on <body> */
 .dark-mode {
   @include mat.all-component-colors($dark-theme);
   @include mat.all-component-typographies($dark-theme);
   @include mat.all-component-densities($dark-theme);
 }
 
-
-/* ============================================
-   GLOBAL DARK MODE STYLES
-   ============================================ */
-
 .dark-mode {
   background: #262525 !important;
   color: #ffffff !important;
 
-  /* Layout */
   .layout-container,
   .content-area {
     background: #212020 !important;
   }
 
-  /* Topbar */
   .topbar {
     background: #262525 !important;
     border-bottom: 1px solid #333 !important;
@@ -62,7 +47,6 @@ $dark-theme: mat.define-theme((
     color: #0095f6 !important;
   }
 
-  /* Sidebar */
   .sidebar {
     background: #262525 !important;
     border-right: 1px solid #333 !important;
@@ -75,7 +59,6 @@ $dark-theme: mat.define-theme((
     }
   }
 
-  /* Sidebar items */
   mat-nav-list a {
     color: #ffffff !important;
 
@@ -88,12 +71,10 @@ $dark-theme: mat.define-theme((
     color: #0095f6 !important;
   }
 
-  /* Content */
   .content-wrapper {
     color: #fff !important;
   }
 
-  /* Cards */
   mat-card {
     background: #353434 !important;
     color: #fff !important;
@@ -101,13 +82,13 @@ $dark-theme: mat.define-theme((
 }
 
 .mat-mdc-select-panel {
-  background-color: #f7f2f2 !important; /* solid white */
+  background-color: #f7f2f2 !important; 
   backdrop-filter: none !important;
   border: 1px solid #b9b4b4 !important;
 }
 
 .dark-mode .mat-mdc-select-panel {
-  background-color: #262525 !important; /* solid dark */
+  background-color: #262525 !important; 
   border: 1px solid #2d2c2c !important;
 }
 

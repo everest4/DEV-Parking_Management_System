@@ -32,19 +32,17 @@ export class LayoutPage {
   ) {
 
     if (isPlatformBrowser(this.platformId)) {
-      // Listen for route changes
+
       this.router.events
         .pipe(filter(event => event instanceof NavigationEnd))
         .subscribe(event => {
           const url = (event as NavigationEnd).url;
 
-          // If login → force LIGHT MODE
           if (url.includes('login')) {
             document.body.classList.remove('dark-mode');
             return;
           }
 
-          // Otherwise → load saved theme
           const saved = localStorage.getItem('darkMode');
           this.isDarkMode = saved === 'true';
 
@@ -63,7 +61,6 @@ export class LayoutPage {
   }
 
   logout() {
-    // When logging out → force light mode
     if (isPlatformBrowser(this.platformId)) {
       document.body.classList.remove('dark-mode');
     }

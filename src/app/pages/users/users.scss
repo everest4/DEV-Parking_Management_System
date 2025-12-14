@@ -66,30 +66,22 @@
   }
 }
 
-/* ----------------------------- */
-/* DARK MODE */
-/* ----------------------------- */
-
-/* Add user DM */
 :host-context(.dark-mode) .user-form-card {
   background: #2c2c2c !important;
   color: white !important;
 }
 
-/*input fields DM */
 :host-context(.dark-mode) input,
 :host-context(.dark-mode) .mat-mdc-select-trigger {
   background: #2c2c2c !important;
   color: white !important;
 }
 
-/* Users grid wrapper DM */
 :host-context(.dark-mode) .users-grid {
   background: #2c2c2c !important;
   color: white !important;
 }
 
-/* Add user button DM */
 :host-context(.dark-mode) .add-user-btn {
   background: #262525 !important;
   color: white !important;

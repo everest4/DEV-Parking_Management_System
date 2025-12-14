@@ -71,25 +71,18 @@
   opacity: 0.7;
 }
 
-/* ------------------------------ */
-/* DARK MODE */
-/* ------------------------------ */
-
-/* Match Home: grid background */
 :host-context(.dark-mode) .spots-grid,
 :host-context(.dark-mode) .tickets-grid {
   background: #252525 !important;
   color: white !important;
 }
 
-/* Match Home: card background */
 :host-context(.dark-mode) .spot-card,
 :host-context(.dark-mode) .ticket-card {
   background: #2c2c2c !important;
   color: white !important;
 }
 
-/* Dark price color */
 :host-context(.dark-mode) .price {
   color: #64b5f6 !important;
 }

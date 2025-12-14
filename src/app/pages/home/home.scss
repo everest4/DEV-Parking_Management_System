@@ -1,8 +1,3 @@
-
-
-/* -------------------------------------------------- */
-/* PAGE LAYOUT */
-/* -------------------------------------------------- */
 .home-container {
   padding: 20px;
   display: flex;
@@ -12,9 +7,6 @@
   margin: 0 auto;
 }
 
-/* -------------------------------------------------- */
-/* ADD SPOT FORM */
-/* -------------------------------------------------- */
 .add-card {
   padding: 20px;
   border-radius: 15px;
@@ -41,9 +33,6 @@
   }
 }
 
-/* -------------------------------------------------- */
-/* GRID */
-/* -------------------------------------------------- */
 .spots-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -53,9 +42,6 @@
   padding: 20px;
 }
 
-/* -------------------------------------------------- */
-/* SPOT CARDS */
-/* -------------------------------------------------- */
 .spot-card {
   border-radius: 18px;
   padding: 20px 16px 26px;
@@ -83,9 +69,6 @@
   }
 }
 
-/* -------------------------------------------------- */
-/* LIGHT MODE COLORS */
-/* -------------------------------------------------- */
 .free {
   border-left: 6px solid #4caf50;
 }
@@ -105,9 +88,6 @@
   color: #333 !important;
 }
 
-/* -------------------------------------------------- */
-/* DARK MODE BASE */
-/* -------------------------------------------------- */
 :host-context(.dark-mode) .add-btn {
   background: #262525 !important;
 }
@@ -124,32 +104,27 @@
   color: white !important;
 }
 
-/* DARK FREE */
 :host-context(.dark-mode) .spot-card.free {
   background: #171717 !important;
   border-left-color: #4caf50 !important;
 }
 
-/* DARK OCCUPIED */
 :host-context(.dark-mode) .spot-card.occupied {
   background: #000000 !important;
   border-left-color: #f44336 !important;
 }
 
-/* DARK EV */
 :host-context(.dark-mode) .spot-card.ev {
   background: linear-gradient(135deg, #063866, #0d47a1) !important;
   color: white !important;
 }
 
-/* DARK UNAVAILABLE */
 :host-context(.dark-mode) .spot-card.unavailable {
   background: #555 !important;
   border-left-color: #888 !important;
   color: white !important;
 }
 
-/* BOOK BUTTON — MATCH ADD BUTTON IN DARK MODE */
 :host-context(.dark-mode) .bookSpot-btn {
   background: linear-gradient(135deg, #0e6a17, #19d276) !important;
   color: white !important;
@@ -158,27 +133,19 @@
 :host-context(.dark-mode) .bookSpot-btn:hover {
   background: linear-gradient(135deg, #1153b6, #1c83e9) !important;
 }
-/* UNBOOK BUTTON — MATCH ADD BUTTON IN DARK MODE */
+
 :host-context(.dark-mode) .unbookSpot-btn {
   background: linear-gradient(135deg, #5f0303, #930808) !important;
   color: white !important;
   border: none !important;
 }
 
-
-
-/* -------------------------------------------------- */
-/* MENU BUTTON */
-/* -------------------------------------------------- */
 .menu-btn {
   position: absolute;
   top: 8px;
   right: 8px;
 }
 
-/* -------------------------------------------------- */
-/* ACTION BUTTONS */
-/* -------------------------------------------------- */
 .card-actions {
   margin-top: 10px;
   display: flex;
@@ -192,9 +159,6 @@
   }
 }
 
-/* -------------------------------------------------- */
-/* LOADING */
-/* -------------------------------------------------- */
 .loading {
   display: flex;
   flex-direction: column;
@@ -207,10 +171,6 @@
     font-size: 32px;
   }
 }
-
-/* -------------------------------------------------- */
-/* MATERIAL SELECT FIXES */
-/* -------------------------------------------------- */
 
 .add-form mat-form-field {
   min-height: 70px;
@@ -240,24 +200,20 @@
   transform: translateY(-50%) !important;
 }
 
-/* Dropdown panel offset */
 .mat-mdc-select-panel {
   margin-top: 6px !important;
 }
 
-/* Input spacing */
 .add-form input.mat-mdc-input-element {
   padding-left: 6px !important;
   padding-right: 6px !important;
 }
 
-/* Make the delete menu popup have same style as MatSelect dropdown */
 ::ng-deep .mat-mdc-menu-panel {
   background: rgb(247, 247, 245) !important;
   box-shadow: 0 4px 14px rgba(0,0,0,0.18) !important;
 }
 
-/* Menu item styling */
 ::ng-deep .mat-mdc-menu-item {
   color: #333 !important;
   font-weight: 500;

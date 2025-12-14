@@ -2,7 +2,6 @@
 
   <h2>Parking Tariffs</h2>
 
-  <!-- Add new tariff -->
   <mat-card class="add-card">
     <h3>Add New Tariff</h3>
 
@@ -28,7 +27,6 @@
     </div>
   </mat-card>
 
-  <!-- Tariffs Grid -->
   <div class="tariffs-grid">
 
     @for (tariff of tariffs; track tariff.id) {
@@ -37,7 +35,6 @@
         <mat-card-title>
         {{ formatDuration(tariff.min) }} → {{ formatDuration(tariff.max) }}
         </mat-card-title>
-
 
         <mat-card-content>
 

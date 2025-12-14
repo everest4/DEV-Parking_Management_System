@@ -2,17 +2,14 @@
 
   <h2>User Management</h2>
 
-  <!-- LOADING -->
   @if (loading) {
     <p class="info">Loading users...</p>
   }
 
-  <!-- ERROR -->
   @if (error) {
     <p class="error">{{ error }}</p>
   }
 
-  <!-- USER FORM -->
   <mat-card class="user-form-card">
 
     <h3>{{ editingUser ? 'Edit User' : 'Add User' }}</h3>
@@ -62,7 +59,6 @@
     </form>
   </mat-card>
 
-  <!-- USERS LIST -->
   <h3>Current Users</h3>
 
   <div class="users-grid">

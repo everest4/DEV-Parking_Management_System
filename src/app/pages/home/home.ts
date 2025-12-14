@@ -36,7 +36,6 @@ export class HomePage implements OnInit {
 
   numbers = Array.from({ length: 30 }, (_, i) => i + 1); // 1–30
 
-  // TIMER STORAGE
   timers: { [id: number]: string } = {};
   timerIntervals: { [id: number]: any } = {};
 
@@ -61,7 +60,6 @@ export class HomePage implements OnInit {
         this.sortSpots();
         this.loading = false;
 
-        // Restore timers for occupied ones
         this.spots.forEach(spot => {
           const key = `timer_${spot.id}`;
           if (spot.status === 'Occupied' && localStorage.getItem(key)) {
@@ -73,7 +71,6 @@ export class HomePage implements OnInit {
     });
   }
 
-  /* TIMER HELPERS */
   formatTime(seconds: number): string {
     const h = Math.floor(seconds / 3600).toString().padStart(2, '0');
     const m = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
@@ -103,7 +100,6 @@ export class HomePage implements OnInit {
     this.timers[spotId] = '00:00:00';
   }
 
-  /* ADD SPOT */
   addSpot() {
     if (this.addSpotForm.invalid) return;
 
@@ -133,7 +129,6 @@ export class HomePage implements OnInit {
     this.addSpotForm.reset();
   }
 
-  /* BOOK SPOT */
   bookSpot(spot: any) {
     if (spot.status !== 'Free' || spot.type === 'Unavailable') return;
 
@@ -144,7 +139,6 @@ export class HomePage implements OnInit {
       });
   }
 
-  /* UNBOOK SPOT */
   unbookSpot(spot: any) {
     this.http.patch(`${environment.apiUrl}/spots/${spot.id}`, { status: 'Free' })
       .subscribe(() => {
@@ -153,7 +147,6 @@ export class HomePage implements OnInit {
       });
   }
 
-  /* DELETE SPOT */
   deleteSpot(spot: any) {
     this.http.delete(`${environment.apiUrl}/spots/${spot.id}`).subscribe({
       next: () => {
@@ -164,8 +157,6 @@ export class HomePage implements OnInit {
     });
   }
 
-
-  /* SORTING */
   sortSpots() {
     this.spots.sort((a, b) => {
       const floorA = a.code[0];
