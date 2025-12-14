@@ -15,7 +15,7 @@ interface Tariff {
 
 interface OccupiedSpotVM {
   spot: any;
-  seconds: number; 
+  seconds: number;
   price: number;
 }
 
@@ -110,7 +110,6 @@ export class TicketsPage implements OnInit {
   }
 
   generateTicket(entry: OccupiedSpotVM) {
-
     const durationMinutes = Math.floor(entry.seconds / 60);
 
     const payload = {
@@ -121,15 +120,36 @@ export class TicketsPage implements OnInit {
       createdAt: new Date().toISOString()
     };
 
+    // 1) Create the ticket
     this.http.post(`${environment.apiUrl}/tickets`, payload).subscribe({
       next: (created: any) => {
         this.generatedTickets.push(created);
-        alert(
-          `Ticket generated:\n` +
-          `Spot: ${created.spotCode}\n` +
-          `Time: ${this.formatDuration(entry.seconds)}\n` +
-          `Price: ${created.price} LEK`
-        );
+
+        // 2) Set the spot to Free in backend
+        this.http
+          .patch(`${environment.apiUrl}/spots/${entry.spot.id}`, { status: 'Free' })
+          .subscribe({
+            next: () => {
+              // 3) Remove timer for that spot
+              localStorage.removeItem(`timer_${entry.spot.id}`);
+
+              // 4) Remove it from the occupied list in the UI
+              this.occupiedSpots = this.occupiedSpots.filter(
+                s => s.spot.id !== entry.spot.id
+              );
+
+              alert(
+                `Ticket generated:\n` +
+                `Spot: ${created.spotCode}\n` +
+                `Time: ${this.formatDuration(entry.seconds)}\n` +
+                `Price: ${created.price} LEK\n\n` +
+                `The spot is now FREE.`
+              );
+            },
+            error: () => {
+              alert('Ticket saved, but failed to free the spot.');
+            }
+          });
       },
       error: () => alert('Failed to save ticket')
     });

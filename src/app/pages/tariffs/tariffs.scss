@@ -75,3 +75,12 @@
   background: #333;
   color: white;
 }
+
+.dark-mode .tariffs-grid {
+  background: #262525;
+}
+
+/* 👇 EXTRA OVERRIDE JUST FOR THE GRID IN DARK MODE */
+:host-context(.dark-mode) .tariffs-grid {
+  background: #333 !important;
+}
