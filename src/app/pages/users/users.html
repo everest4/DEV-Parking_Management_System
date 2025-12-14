@@ -1,6 +1,6 @@
 <div class="users-container">
 
-  <h2>Users</h2>
+  <h2>User Management</h2>
 
   @if (loading) {
     <p class="info">Loading users...</p>
@@ -10,9 +10,9 @@
     <p class="error">{{ error }}</p>
   }
 
-  <!-- FORM CARD -->
+  <!-- FORM -->
   <mat-card class="user-form-card">
-    <h3>{{ editingUser ? 'Edit User' : 'Add User' }}</h3>
+    <h3>{{ editingUser ? 'Edit User' : 'Add New User' }}</h3>
 
     <form [formGroup]="userForm" class="user-form">
 
@@ -36,19 +36,19 @@
         <mat-select formControlName="role">
           <mat-option value="admin">Admin</mat-option>
           <mat-option value="staff">Staff</mat-option>
-          <mat-option value="viewer">Viewer</mat-option>
+          <mat-option value="manager">Manager</mat-option>
         </mat-select>
       </mat-form-field>
 
       <div class="buttons">
-        <button mat-raised-button color="primary" (click)="saveUser()">
+        <button mat-raised-button color="primary" (click)="saveUser()" class="add-user-btn">
+          <mat-icon>add_circle</mat-icon>
           {{ editingUser ? 'Save Changes' : 'Add User' }}
         </button>
 
+
         @if (editingUser) {
-          <button mat-raised-button color="warn" (click)="cancelEdit()">
-            Cancel
-          </button>
+          <button mat-raised-button color="warn" (click)="cancelEdit()">Cancel</button>
         }
       </div>
 
@@ -56,32 +56,25 @@
   </mat-card>
 
   <!-- USERS LIST -->
-  <h3>All Users</h3>
-
-  @if (!loading && users.length === 0) {
-    <p class="info">No users found.</p>
-  }
+  <h3>Current Users</h3>
 
   <div class="users-grid">
     @for (u of users; track u.id) {
       <mat-card class="user-card">
-
         <mat-card-title>{{ u.name }}</mat-card-title>
         <mat-card-subtitle>{{ u.email }}</mat-card-subtitle>
 
         <p class="username">@{{ u.username }}</p>
-        <p class="role">Role: {{ u.role | uppercase }}</p>
+        <p class="role">Role: {{ u.role }}</p>
 
         <div class="card-buttons">
-          <button mat-icon-button color="primary" (click)="startEdit(u)" aria-label="Edit user">
+          <button mat-icon-button color="primary" (click)="startEdit(u)">
             <mat-icon>edit</mat-icon>
           </button>
-
-          <button mat-icon-button color="warn" (click)="deleteUser(u)" aria-label="Delete user">
+          <button mat-icon-button color="warn" (click)="deleteUser(u)">
             <mat-icon>delete</mat-icon>
           </button>
         </div>
-
       </mat-card>
     }
   </div>

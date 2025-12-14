@@ -10,6 +10,7 @@
 .user-form-card {
   padding: 20px;
   border-radius: 12px;
+  background: rgb(232, 229, 218);
 
   h3 {
     margin-bottom: 15px;
@@ -33,11 +34,15 @@
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  background: rgb(232, 229, 218);
+  border-radius: 12px;
+  padding: 20px;
 }
 
 .user-card {
   padding: 18px;
   border-radius: 12px;
+  background: rgb(232, 229, 218);
 
   .role {
     margin: 8px 0;
@@ -48,4 +53,44 @@
     display: flex;
     gap: 10px;
   }
+}
+
+.add-user-btn {
+  grid-column: span 3;
+  justify-self: start;
+  border-radius: 10px;
+  background: rgb(232, 229, 218);
+
+  mat-icon {
+    font-size: 20px;
+  }
+}
+
+/* ----------------------------- */
+/* DARK MODE */
+/* ----------------------------- */
+
+/* Add user DM */
+:host-context(.dark-mode) .user-form-card {
+  background: #2c2c2c !important;
+  color: white !important;
+}
+
+/*input fields DM */
+:host-context(.dark-mode) input,
+:host-context(.dark-mode) .mat-mdc-select-trigger {
+  background: #2c2c2c !important;
+  color: white !important;
+}
+
+/* Users grid wrapper DM */
+:host-context(.dark-mode) .users-grid {
+  background: #2c2c2c !important;
+  color: white !important;
+}
+
+/* Add user button DM */
+:host-context(.dark-mode) .add-user-btn {
+  background: #262525 !important;
+  color: white !important;
 }

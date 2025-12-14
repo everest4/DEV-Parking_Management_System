@@ -149,6 +149,24 @@
   color: white !important;
 }
 
+/* BOOK BUTTON — MATCH ADD BUTTON IN DARK MODE */
+:host-context(.dark-mode) .bookSpot-btn {
+  background: linear-gradient(135deg, #0d47a1, #1976d2) !important;
+  color: white !important;
+}
+
+:host-context(.dark-mode) .bookSpot-btn:hover {
+  background: linear-gradient(135deg, #1153b6, #1c83e9) !important;
+}
+/* UNBOOK BUTTON — MATCH ADD BUTTON IN DARK MODE */
+:host-context(.dark-mode) .unbookSpot-btn {
+  background: linear-gradient(135deg, #03335f, #084093) !important;
+  color: white !important;
+  border: none !important;
+}
+
+
+
 /* -------------------------------------------------- */
 /* MENU BUTTON */
 /* -------------------------------------------------- */

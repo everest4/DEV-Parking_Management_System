@@ -95,24 +95,25 @@
 
         <!-- ACTIONS -->
         <div class="card-actions">
-
           <button
             mat-raised-button
-            color="primary"
+            class="bookSpot-btn"
             *ngIf="spot.status === 'Free' && spot.type !== 'Unavailable'"
             (click)="bookSpot(spot)"
           >
+
             <mat-icon>check_circle</mat-icon> Book
           </button>
 
           <button
             mat-raised-button
-            color="warn"
+            class="unbookSpot-btn"
             *ngIf="spot.status === 'Occupied'"
             (click)="unbookSpot(spot)"
           >
             <mat-icon>cancel</mat-icon> Unbook
           </button>
+
 
           <button
             mat-raised-button

@@ -9,7 +9,7 @@
 ---------------------- */
 .topbar {
   height: 55px;
-  background: #ffffff;
+  background: #fafafa;
   border-bottom: 1px solid #dbdbdb;
 
   display: flex;
@@ -52,7 +52,7 @@
 ---------------------- */
 .sidebar {
   width: 250px;
-  background: #ffffff;
+  background: #fafafa;
   border-right: 1px solid #dbdbdb;
   padding: 20px 0;
 }
@@ -105,7 +105,7 @@ mat-nav-list a:hover {
 
 /* Content */
 .content-area {
-  background: #fafafa;
+  background: #ffffff;
 }
 
 .content-wrapper {
