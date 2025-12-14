@@ -116,7 +116,7 @@ export class HomePage implements OnInit {
     }
 
     const newSpot = {
-      id: Date.now(),
+      id: String(Date.now()),
       lotId: 1,
       code,
       type,
@@ -155,11 +155,15 @@ export class HomePage implements OnInit {
 
   /* DELETE SPOT */
   deleteSpot(spot: any) {
-    this.http.delete(`${environment.apiUrl}/spots/${spot.id}`).subscribe(() => {
-      this.stopTimer(spot.id);
-      this.spots = this.spots.filter(s => s.id !== spot.id);
+    this.http.delete(`${environment.apiUrl}/spots/${spot.id}`).subscribe({
+      next: () => {
+        this.stopTimer(spot.id);
+        this.spots = this.spots.filter(s => s.id !== spot.id);
+      },
+      error: err => console.error("DELETE ERROR:", err)
     });
   }
+
 
   /* SORTING */
   sortSpots() {

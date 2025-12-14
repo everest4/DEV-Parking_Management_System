@@ -3,14 +3,11 @@
     {
       "email": "admin@test.com",
       "password": "admin123",
-      "role": "Admin",
-      "id": "929"
-    },
-    {
-      "email": "attendant@test.com",
-      "password": "attendant123",
-      "role": "Attendant",
-      "id": "7482"
+      "role": "admin",
+      "id": "929",
+      "name": "Everest",
+      "surname": "",
+      "username": "Everest"
     }
   ],
   "lots": [
@@ -86,13 +83,6 @@
       "status": "Occupied"
     },
     {
-      "id": "1763592264604",
-      "lotId": 1,
-      "code": "A6",
-      "type": "Regular",
-      "status": "Free"
-    },
-    {
       "id": "1763592278114",
       "lotId": 1,
       "code": "B3",
@@ -103,20 +93,6 @@
       "id": "1763592287073",
       "lotId": 1,
       "code": "C16",
-      "type": "Unavailable",
-      "status": "Unavailable"
-    },
-    {
-      "id": 1763727617075,
-      "lotId": 1,
-      "code": "B12",
-      "type": "Regular",
-      "status": "Free"
-    },
-    {
-      "id": 1765022760364,
-      "lotId": 1,
-      "code": "A26",
       "type": "Unavailable",
       "status": "Unavailable"
     }
@@ -247,6 +223,14 @@
       "durationMinutes": 53,
       "price": 200,
       "createdAt": "2025-12-14T19:49:35.244Z"
+    },
+    {
+      "id": "fca1",
+      "spotId": "1763156403951",
+      "spotCode": "A1",
+      "durationMinutes": 2,
+      "price": 0,
+      "createdAt": "2025-12-14T20:53:27.510Z"
     }
   ],
   "payments": []

@@ -151,7 +151,7 @@
 
 /* BOOK BUTTON — MATCH ADD BUTTON IN DARK MODE */
 :host-context(.dark-mode) .bookSpot-btn {
-  background: linear-gradient(135deg, #0d47a1, #1976d2) !important;
+  background: linear-gradient(135deg, #0e6a17, #19d276) !important;
   color: white !important;
 }
 
@@ -160,7 +160,7 @@
 }
 /* UNBOOK BUTTON — MATCH ADD BUTTON IN DARK MODE */
 :host-context(.dark-mode) .unbookSpot-btn {
-  background: linear-gradient(135deg, #03335f, #084093) !important;
+  background: linear-gradient(135deg, #5f0303, #930808) !important;
   color: white !important;
   border: none !important;
 }
@@ -250,3 +250,16 @@
   padding-left: 6px !important;
   padding-right: 6px !important;
 }
+
+/* Make the delete menu popup have same style as MatSelect dropdown */
+::ng-deep .mat-mdc-menu-panel {
+  background: rgb(247, 247, 245) !important;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18) !important;
+}
+
+/* Menu item styling */
+::ng-deep .mat-mdc-menu-item {
+  color: #333 !important;
+  font-weight: 500;
+}
+
