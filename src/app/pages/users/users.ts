@@ -34,7 +34,7 @@ export class UsersPage implements OnInit {
   error = '';
   editingUser: User | null = null;
 
-  userForm: any;  // <-- Created later in ngOnInit
+  userForm: any;
 
   constructor(
     private usersService: UsersService,
@@ -42,11 +42,13 @@ export class UsersPage implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // ✅ Correct place to initialize the FormGroup
+    // FIXED: you MUST create the form here
     this.userForm = this.fb.group({
       name: ['', Validators.required],
+      surname: [''],
       email: ['', [Validators.required, Validators.email]],
       username: ['', Validators.required],
+      password: ['', Validators.required],
       role: ['staff', Validators.required]
     });
 
@@ -70,7 +72,15 @@ export class UsersPage implements OnInit {
 
   startEdit(user: User): void {
     this.editingUser = user;
-    this.userForm.patchValue(user);
+
+    this.userForm.patchValue({
+      name: user.name,
+      surname: user.surname ?? '',
+      email: user.email,
+      username: user.username,
+      password: user.password, // keep existing password
+      role: user.role
+    });
   }
 
   cancelEdit(): void {
@@ -81,23 +91,34 @@ export class UsersPage implements OnInit {
   saveUser(): void {
     if (this.userForm.invalid) return;
 
-    const formData = this.userForm.value;
+    const form = this.userForm.value;
 
     if (this.editingUser) {
-      const updated: User = { ...this.editingUser, ...formData };
+      // UPDATE USER
+      const updated: User = {
+        ...this.editingUser,
+        name: form.name,
+        surname: form.surname ?? '',
+        email: form.email,
+        username: form.username,
+        password: form.password,
+        role: form.role
+      };
 
       this.usersService.update(updated).subscribe(() => {
         this.users = this.users.map(u => u.id === updated.id ? updated : u);
         this.cancelEdit();
       });
-
     } else {
+      // CREATE USER
       const newUser: User = {
-        id: Date.now(),
-        name: formData.name!,
-        email: formData.email!,
-        username: formData.username!,
-        role: formData.role! as 'admin' | 'staff' | 'manager'
+        id: String(Date.now()),
+        name: form.name,
+        surname: form.surname ?? '',
+        email: form.email,
+        username: form.username,
+        password: form.password,
+        role: form.role
       };
 
       this.usersService.create(newUser).subscribe(() => {
@@ -107,13 +128,16 @@ export class UsersPage implements OnInit {
     }
   }
 
-  deleteUser(u: User): void {
-    if (!confirm(`Remove user "${u.name}"?`)) return;
+  deleteUser(user: User): void {
+    if (!confirm(`Delete user "${user.name}"?`)) return;
 
-    this.usersService.delete(u.id).subscribe(() => {
-      this.users = this.users.filter(x => x.id !== u.id);
-      if (this.editingUser?.id === u.id) {
-        this.cancelEdit();
+    this.usersService.delete(user.id).subscribe({
+      next: () => {
+        this.users = this.users.filter(u => u.id !== user.id);
+      },
+      error: err => {
+        console.error('Delete failed:', err);
+        alert('Error deleting user — check backend.');
       }
     });
   }

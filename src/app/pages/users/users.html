@@ -2,17 +2,20 @@
 
   <h2>User Management</h2>
 
+  <!-- LOADING -->
   @if (loading) {
     <p class="info">Loading users...</p>
   }
 
+  <!-- ERROR -->
   @if (error) {
     <p class="error">{{ error }}</p>
   }
 
-  <!-- FORM -->
+  <!-- USER FORM -->
   <mat-card class="user-form-card">
-    <h3>{{ editingUser ? 'Edit User' : 'Add New User' }}</h3>
+
+    <h3>{{ editingUser ? 'Edit User' : 'Add User' }}</h3>
 
     <form [formGroup]="userForm" class="user-form">
 
@@ -32,6 +35,11 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
         <mat-label>Role</mat-label>
         <mat-select formControlName="role">
           <mat-option value="admin">Admin</mat-option>
@@ -45,7 +53,6 @@
           <mat-icon>add_circle</mat-icon>
           {{ editingUser ? 'Save Changes' : 'Add User' }}
         </button>
-
 
         @if (editingUser) {
           <button mat-raised-button color="warn" (click)="cancelEdit()">Cancel</button>
@@ -61,6 +68,7 @@
   <div class="users-grid">
     @for (u of users; track u.id) {
       <mat-card class="user-card">
+
         <mat-card-title>{{ u.name }}</mat-card-title>
         <mat-card-subtitle>{{ u.email }}</mat-card-subtitle>
 
@@ -75,6 +83,7 @@
             <mat-icon>delete</mat-icon>
           </button>
         </div>
+
       </mat-card>
     }
   </div>

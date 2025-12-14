@@ -4,20 +4,13 @@
       "email": "admin@test.com",
       "password": "admin123",
       "role": "Admin",
-      "id": "929f"
+      "id": "929"
     },
     {
       "email": "attendant@test.com",
       "password": "attendant123",
       "role": "Attendant",
       "id": "7482"
-    },
-    {
-      "id": 1765740113436,
-      "name": "eve",
-      "email": "eve04@gmail.com",
-      "username": "eve04",
-      "role": "admin"
     }
   ],
   "lots": [
