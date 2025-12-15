@@ -1,5 +1,6 @@
 export interface Tariff {
-  id: number;
-  label: string; 
-  price: number; 
+  id: string; 
+  min: number;
+  max: number;
+  price: number;
 }

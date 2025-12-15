@@ -4,7 +4,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-
 import { PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { filter } from 'rxjs/operators';
@@ -22,6 +21,7 @@ import { filter } from 'rxjs/operators';
   templateUrl: './layout.html',
   styleUrls: ['./layout.scss']
 })
+
 export class LayoutPage {
 
   isDarkMode = false;
@@ -29,8 +29,9 @@ export class LayoutPage {
   constructor(
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {
-
+  ) 
+  
+  {
     if (isPlatformBrowser(this.platformId)) {
 
       this.router.events
@@ -47,7 +48,8 @@ export class LayoutPage {
           this.isDarkMode = saved === 'true';
 
           document.body.classList.toggle('dark-mode', this.isDarkMode);
-        });
+        } 
+      );
     }
   }
 

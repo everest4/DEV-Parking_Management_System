@@ -24,7 +24,7 @@
       "lotId": 1,
       "code": "A1",
       "type": "Regular",
-      "status": "Free"
+      "status": "Occupied"
     },
     {
       "id": "1763156408662",
@@ -133,6 +133,12 @@
       "min": 721,
       "max": 1440,
       "price": 2000
+    },
+    {
+      "id": "1765833304213",
+      "min": 1441,
+      "max": 1000000,
+      "price": 3000
     }
   ],
   "tickets": [
@@ -232,6 +238,5 @@
       "price": 0,
       "createdAt": "2025-12-14T20:53:27.510Z"
     }
-  ],
-  "payments": []
+  ]
 }

@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { environment } from '../../../environments/environment';
 
 interface Tariff {
-  id: number;
+  id: string;
   min: number;
   max: number;
   price: number;
@@ -56,66 +56,72 @@ export class TariffsPage implements OnInit {
   }
 
   saveTariff(tariff: Tariff) {
-  tariff.min = this.parseDurationInput(tariff.min as any);
-  tariff.max = this.parseDurationInput(tariff.max as any);
-  tariff.price = Number(tariff.price);
+    console.log("PATCH →", `${environment.apiUrl}/tariffs/${tariff.id}`, tariff);
 
-  this.http.patch(`${environment.apiUrl}/tariffs/${tariff.id}`, tariff)
-    .subscribe(() => {
-      alert('Tariff updated!');
-      this.loadTariffs();
-    });
+    this.http.patch(`${environment.apiUrl}/tariffs/${tariff.id}`, tariff)
+      .subscribe({
+        next: () => {
+          alert('Tariff updated!');
+          this.loadTariffs();
+        },
+        error: err => {
+          console.error("❌ PATCH ERROR:", err);
+          alert("Failed to save changes — check backend.");
+        }
+      });
   }
 
-
-  deleteTariff(id: number) {
+  deleteTariff(id: string) {
     if (!confirm('Delete this tariff?')) return;
 
-    this.http.delete(`${environment.apiUrl}/tariffs/${id}`).subscribe(() => {
-      this.tariffs = this.tariffs.filter(t => t.id !== id);
+    this.http.delete(`${environment.apiUrl}/tariffs/${id}`).subscribe({
+      next: () => {
+        this.tariffs = this.tariffs.filter(t => t.id !== id);
+      },
+      error: err => {
+        console.error("❌ DELETE ERROR:", err);
+        alert("Failed to delete — check backend.");
+      }
     });
   }
 
-    addTariff() {
-        if (!this.newMin || !this.newMax || !this.newPrice) {
-            alert('All fields required.'); 
-            return;
-        }
-
-        const newTariff: Tariff = {
-            id: Date.now(),
-            min: this.parseDurationInput(this.newMin as any),
-            max: this.parseDurationInput(this.newMax as any),
-            price: Number(this.newPrice)
-        };
-
-        this.http.post(`${environment.apiUrl}/tariffs`, newTariff).subscribe(() => {
-            this.tariffs.push(newTariff);
-            this.tariffs.sort((a, b) => a.min - b.min);
-
-            this.newMin = null;
-            this.newMax = null;
-            this.newPrice = null;
-        });
+  addTariff() {
+    if (!this.newMin || !this.newMax || !this.newPrice) {
+      alert('All fields required.');
+      return;
     }
 
+    const newTariff: Tariff = {
+      id: String(Date.now()),   // ✅ FIXED → STRING ID ALWAYS
+      min: this.parseDurationInput(this.newMin as any),
+      max: this.parseDurationInput(this.newMax as any),
+      price: Number(this.newPrice)
+    };
+
+    this.http.post(`${environment.apiUrl}/tariffs`, newTariff).subscribe({
+      next: () => {
+        this.tariffs.push(newTariff);
+        this.tariffs.sort((a, b) => a.min - b.min);
+
+        this.newMin = null;
+        this.newMax = null;
+        this.newPrice = null;
+      },
+      error: err => console.error("❌ POST ERROR:", err)
+    });
+  }
 
   formatDuration(min: number): string {
     if (min < 60) return `${min} min`;
-
     const hours = Math.floor(min / 60);
     const minutes = min % 60;
-
     if (minutes === 0) return `${hours} hour${hours > 1 ? 's' : ''}`;
-
     return `${hours}h ${minutes}min`;
   }
 
   parseDurationInput(value: string | number): number {
     if (typeof value === 'number') return value;
-
     value = value.toLowerCase().trim();
-
     if (/^\d+$/.test(value)) return parseInt(value, 10);
 
     let total = 0;
@@ -127,12 +133,10 @@ export class TariffsPage implements OnInit {
     if (minMatch) total += parseInt(minMatch[1], 10);
 
     if (value.includes(':')) {
-        const [h, m] = value.split(':');
-        total = Number(h) * 60 + Number(m);
+      const [h, m] = value.split(':');
+      total = Number(h) * 60 + Number(m);
     }
 
     return total;
   }
-
-
 }
