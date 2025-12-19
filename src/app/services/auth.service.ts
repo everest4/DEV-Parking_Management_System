@@ -7,21 +7,27 @@ import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private apiUrl = 'http://localhost:3001/users';
-  private http = inject(HttpClient)
-  private router = inject(Router)
-  login(username: string, password: string): Observable<User | null> {
-    return this.http.get<User[]>(`${this.apiUrl}?username=${username}`).pipe(
-      map(users => {
-        const user = users[0];
-        if (user && user.password === password) {
 
-          localStorage.setItem('user', JSON.stringify(user));
-          return user;
-        }
-        return null;
-      })
-    );
+  private apiUrl = 'http://localhost:3001/users';
+
+  private http = inject(HttpClient);
+  private router = inject(Router);
+
+  login(email: string, password: string): Observable<User | null> {
+    return this.http
+      .get<User[]>(`${this.apiUrl}?email=${email}`)
+      .pipe(
+        map(users => {
+          const user = users[0];
+
+          if (user && user.password === password) {
+            localStorage.setItem('user', JSON.stringify(user));
+            return user;
+          }
+
+          return null;
+        })
+      );
   }
 
   logout() {

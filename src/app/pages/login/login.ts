@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
+import { Router } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -12,7 +11,6 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-login-page',
   imports: [
     FormsModule,
-    MatCardModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule
@@ -21,19 +19,23 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.scss']
 })
 export class LoginPage {
-  username = '';
+
+  email = '';
   password = '';
 
-  constructor(private router: Router, private auth: AuthService) {}
+  constructor(
+    private auth: AuthService,
+    private router: Router
+  ) {}
 
   login() {
-    this.auth.login(this.username, this.password).subscribe(user => {
-      if (user) {
-        this.router.navigate(['/home']);
-      } else {
-        alert('Invalid username or password');
-      }
-    });
+    this.auth.login(this.email.trim(), this.password.trim())
+      .subscribe(user => {
+        if (user) {
+          this.router.navigate(['/home']);
+        } else {
+          alert('Invalid email or password');
+        }
+      });
   }
-
 }
