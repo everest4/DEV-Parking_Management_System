@@ -34,7 +34,7 @@ export class HomePage implements OnInit {
   loading = true;
   error = '';
 
-  numbers = Array.from({ length: 30 }, (_, i) => i + 1); // 1–30
+  numbers = Array.from({ length: 30 }, (_, i) => i + 1);
 
   timers: { [id: number]: string } = {};
   timerIntervals: { [id: number]: any } = {};

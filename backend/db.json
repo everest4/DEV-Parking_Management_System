@@ -8,6 +8,15 @@
       "name": "Everest",
       "surname": "",
       "username": "Everest"
+    },
+    {
+      "id": "1765920495465",
+      "name": "Test",
+      "surname": "",
+      "email": "test@test.com",
+      "username": "Test",
+      "password": "admin123",
+      "role": "admin"
     }
   ],
   "lots": [
@@ -24,14 +33,14 @@
       "lotId": 1,
       "code": "A1",
       "type": "Regular",
-      "status": "Occupied"
+      "status": "Free"
     },
     {
       "id": "1763156408662",
       "lotId": 1,
       "code": "A2",
       "type": "Regular",
-      "status": "Free"
+      "status": "Occupied"
     },
     {
       "id": "1763156413908",
@@ -80,7 +89,7 @@
       "lotId": 1,
       "code": "A4",
       "type": "EV",
-      "status": "Occupied"
+      "status": "Free"
     },
     {
       "id": "1763592278114",
@@ -237,6 +246,14 @@
       "durationMinutes": 2,
       "price": 0,
       "createdAt": "2025-12-14T20:53:27.510Z"
+    },
+    {
+      "id": "8b23",
+      "spotId": "1763156403951",
+      "spotCode": "A1",
+      "durationMinutes": 0,
+      "price": 0,
+      "createdAt": "2025-12-19T00:54:38.230Z"
     }
   ]
 }
