@@ -65,7 +65,7 @@ export class TariffsPage implements OnInit {
           this.loadTariffs();
         },
         error: err => {
-          console.error("❌ PATCH ERROR:", err);
+          console.error("PATCH ERROR:", err);
           alert("Failed to save changes — check backend.");
         }
       });
@@ -79,7 +79,7 @@ export class TariffsPage implements OnInit {
         this.tariffs = this.tariffs.filter(t => t.id !== id);
       },
       error: err => {
-        console.error("❌ DELETE ERROR:", err);
+        console.error("DELETE ERROR:", err);
         alert("Failed to delete — check backend.");
       }
     });
@@ -92,7 +92,7 @@ export class TariffsPage implements OnInit {
     }
 
     const newTariff: Tariff = {
-      id: String(Date.now()),   // ✅ FIXED → STRING ID ALWAYS
+      id: String(Date.now()),  
       min: this.parseDurationInput(this.newMin as any),
       max: this.parseDurationInput(this.newMax as any),
       price: Number(this.newPrice)
@@ -107,7 +107,7 @@ export class TariffsPage implements OnInit {
         this.newMax = null;
         this.newPrice = null;
       },
-      error: err => console.error("❌ POST ERROR:", err)
+      error: err => console.error("POST ERROR:", err)
     });
   }
 
